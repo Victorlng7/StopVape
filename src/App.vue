@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CreeGout from "./composant/creeGout.vue";
+</script>
 
-<template></template>
+<template>
+    <CreeGout />
+</template>
 
 <style scoped></style>
