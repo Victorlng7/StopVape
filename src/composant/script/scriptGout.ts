@@ -14,3 +14,7 @@ export function switchArome(v: number): number {
             throw new Error("V se trouve entre 1 et 5 pas plus ni moins");
     }
 }
+
+export function switchNico(volume: number, cible: number): number {
+    return (volume * cible) / 20;
+}
