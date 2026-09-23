@@ -23,11 +23,12 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-$api/.env
-
 *.tsbuildinfo
-
 .eslintcache
+
+# Variables d'environnement
+.env
+api/.env
 
 # Cypress
 /cypress/videos/
