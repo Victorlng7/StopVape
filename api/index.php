@@ -50,6 +50,54 @@ switch ($action) {
         echo json_encode(["resultat" => "Utilisateur supprimé"]);
         break;
 
+    case 'ajouter_releve':
+        $user_id = $input['id'] ?? 0;
+        $puffs = $input['relevePuff'] ?? 0;
+        $volume_ml = $input['volume_ml'] ?? 0;
+        $taux_nicotine = $input['tauxNico'] ?? 0;
+        $cigarettes_fumees = $input['clopesmoke'] ?? 0;
+        $niveau_manque = $input['manque'] ?? 1;
+        $depenses = $input['depense'] ?? 0;
+
+        $date_releve = date('Y-m-d');
+
+        $stmt = $pdo->prepare("
+            INSERT INTO suivi_quotidien 
+            (user_id, date_releve, puffs, volume_ml, taux_nicotine, cigarettes_fumees, niveau_manque, depenses_euros) 
+            VALUES 
+            (:user_id, :date_releve, :puffs, :volume_ml, :taux_nicotine, :cigarettes_fumees, :niveau_manque, :depenses_euros)
+        ");
+
+        $stmt->execute([
+            'user_id' => $user_id,
+            'date_releve' => $date_releve,
+            'puffs' => $puffs,
+            'volume_ml' => $volume_ml,
+            'taux_nicotine' => $taux_nicotine,
+            'cigarettes_fumees' => $cigarettes_fumees,
+            'niveau_manque' => $niveau_manque,
+            'depenses_euros' => $depenses
+        ]);
+
+        echo json_encode(["resultat" => "Relevé ajouté avec succès"]);
+        break;
+
+    case 'historique_releves':
+        $user_id = $input['id'] ?? 0;
+
+        $stmt = $pdo->prepare("
+            SELECT * 
+            FROM suivi_quotidien 
+            WHERE user_id = :user_id 
+            ORDER BY date_releve ASC
+        ");
+
+        $stmt->execute(['user_id' => $user_id]);
+        $releves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(["resultat" => $releves]);
+        break;
+
     default:
         http_response_code(400);
         echo json_encode(["erreur" => "Action non reconnue par le serveur"]);
