@@ -1,5 +1,5 @@
 export function creerDate(str: string): Date {
-    const [jour, mois, annee] = str.split("-").map(Number);
+    const [annee, mois, jour] = str.split("-").map(Number);
 
-    return new Date(Number(annee), Number(mois), Number(jour));
+    return new Date(Number(annee), Number(mois) - 1, Number(jour));
 }

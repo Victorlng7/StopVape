@@ -18,7 +18,7 @@ const iduser = ref(1);
     <!-- <utilisateur/> -->
     <!-- <AjouterValeur :idUser="iduser" /> -->
     <!-- <graphiques :idUser="iduser" /> -->
-    <Stats />
+    <Stats :id-user="iduser" />
 </template>
 
 <style scoped></style>

@@ -64,7 +64,7 @@ export class stats {
 
             const difference = date2.getTime() - date1.getTime();
 
-            return difference / (1000 * 60 * 60 * 24);
+            return difference / (1000 * 60 * 60 * 24) + 1;
         } else return 0;
     }
 

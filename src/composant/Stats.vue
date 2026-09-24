@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //Import vue
-import { ref, onMounted } from "vue";
+import { ref, onMounted, toRaw } from "vue";
 
 //Import composant
 import Total from "./stats/Total.vue";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //Import vue
-import { ref, watch } from "vue";
+import { ref, watch, toRaw } from "vue";
 
 //Import composant
 
@@ -20,21 +20,13 @@ const s = new stats([], [], [], [], []);
 watch(
     () => props.dataPuffs,
     () => {
-        // console.log({
-        //     labels: props.labels,
-        //     dataPuffs: props.dataPuffs,
-        //     dataNico: props.dataNico,
-        //     dataVolume: props.dataVolume,
-        //     dataClope: props.dataClope,
-        // });
-
         s.setLabel(props.labels);
         s.setPuff(props.dataPuffs);
         s.setNico(props.dataNico);
         s.setVolume(props.dataVolume);
         s.setClope(props.dataClope);
 
-        // display();
+        display();
     },
     { deep: true },
 );
