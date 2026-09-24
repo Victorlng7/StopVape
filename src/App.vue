@@ -14,10 +14,10 @@ const iduser = ref(1);
 </script>
 
 <template>
-    <!-- <creeGout /> -->
-    <!-- <utilisateur/> -->
-    <!-- <AjouterValeur :idUser="iduser" /> -->
-    <!-- <graphiques :idUser="iduser" /> -->
+    <creeGout />
+    <utilisateur />
+    <AjouterValeur :idUser="iduser" />
+    <graphiques :idUser="iduser" />
     <Stats :id-user="iduser" />
 </template>
 
