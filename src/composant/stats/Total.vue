@@ -25,7 +25,7 @@ watch(
         s.setNico(props.dataNico);
         s.setVolume(props.dataVolume);
         s.setClope(props.dataClope);
-
+ 
         display();
     },
     { deep: true },

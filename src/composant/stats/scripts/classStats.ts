@@ -2,11 +2,11 @@ import { addTab } from "./addTab.ts";
 import { creerDate } from "./creerDate.ts";
 
 export class stats {
-    private label: string[];
-    private puff: number[];
-    private nico: number[];
-    private clope: number[];
-    private volume: number[];
+    public label: string[];
+    public puff: number[];
+    public nico: number[];
+    public clope: number[];
+    public volume: number[];
 
     constructor(
         label: string[],
@@ -21,30 +21,7 @@ export class stats {
         this.clope = clope;
         this.volume = volume;
     }
-
-    //Get values Vanilla
-
-    get labels(): string[] {
-        return this.label;
-    }
-
-    get puffs(): number[] {
-        return this.puff;
-    }
-
-    get nicos(): number[] {
-        return this.nico;
-    }
-
-    get clopes(): number[] {
-        return this.clope;
-    }
-
-    get volumes(): number[] {
-        return this.volume;
-    }
-
-    //Get values Autre
+    //Get values
 
     get totalPuff(): number {
         return addTab(this.puff);
