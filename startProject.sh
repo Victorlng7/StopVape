@@ -24,7 +24,9 @@ cleanup() {
 
 trap cleanup EXIT INT TERM
 
-sudo systemctl start mariadb
+if ! systemctl is-active --quiet mariadb; then
+    sudo systemctl start mariadb
+fi
 
 cd "$PROJECT_DIR/api"
 setsid php -S localhost:8000 &
