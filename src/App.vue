@@ -15,7 +15,7 @@ const iduser = ref(1);
 <template>
     <!-- <creeGout /> -->
     <!-- <utilisateur/> -->
-    <AjouterValeur :idUser="iduser" />
+    <!-- <AjouterValeur :idUser="iduser" /> -->
     <Graphiques :idUser="iduser" />
 </template>
 
