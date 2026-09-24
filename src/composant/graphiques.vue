@@ -6,7 +6,6 @@ import { ref, onMounted } from "vue";
 import graphPuffTemps from "./graphiques/graphPuffTemps.vue";
 import graphVolumeTemps from "./graphiques/graphVolumeTemps.vue";
 import graphNicoTemps from "./graphiques/graphNicoTemps.vue";
-import graphNicoPuff from "./graphiques/graphNicoPuff.vue";
 
 //import interface / API
 import type { Relever } from "./script/Relever.ts";
@@ -21,6 +20,7 @@ const dataPuffs = ref<number[]>([]);
 const dataVolume = ref<number[]>([]);
 const dataClope = ref<number[]>([]);
 const dataNico = ref<number[]>([]);
+const dataManque = ref<number[]>([]);
 
 const chargerHistorique = async () => {
     const data = await requeteAPI("historique_releves", { id: id.value });
@@ -33,6 +33,7 @@ const chargerHistorique = async () => {
         dataVolume.value = historique.map((r) => r.volume_ml);
         dataClope.value = historique.map((r) => r.cigarettes_fumees);
         dataNico.value = historique.map((r) => r.taux_nicotine);
+        dataManque.value = historique.map((r) => r.niveau_manque);
     }
 };
 
@@ -43,7 +44,11 @@ onMounted(() => {
 
 <template>
     <div class="dashboard-container">
-        <graphPuffTemps :labels="labelsDates" :dataPuffs="dataPuffs" />
+        <graphPuffTemps
+            :labels="labelsDates"
+            :dataPuffs="dataPuffs"
+            :dataManque="dataManque"
+        />
 
         <graphVolumeTemps
             :labels="labelsDates"
@@ -51,8 +56,10 @@ onMounted(() => {
             :dataClope="dataClope"
         />
 
-        <graphNicoTemps :labels="labelsDates" :dataNico="dataNico" />
-
-        <graphNicoPuff :dataPuffs="dataPuffs" :dataNico="dataNico" />
+        <graphNicoTemps
+            :labels="labelsDates"
+            :dataNico="dataNico"
+            :dataPuffs="dataPuffs"
+        />
     </div>
 </template>

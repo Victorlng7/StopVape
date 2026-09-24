@@ -5,6 +5,7 @@ import Chart from "chart.js/auto";
 const props = defineProps<{
     labels: string[];
     dataPuffs: number[];
+    dataManque: number[];
 }>();
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -23,13 +24,36 @@ onMounted(() => {
                         borderColor: "#42b883",
                         backgroundColor: "rgba(66, 184, 131, 0.2)",
                         tension: 0.1,
-                        fill: true,
+                        yAxisID: "y",
+                    },
+                    {
+                        label: "Envie",
+                        data: [],
+                        showLine: false,
+                        borderColor: "#b612fb",
+                        backgroundColor: "rgba(66, 184, 131, 0.2)",
+                        yAxisID: "y1",
                     },
                 ],
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: "linear",
+                        display: true,
+                        position: "left",
+                    },
+                    y1: {
+                        type: "linear",
+                        display: true,
+                        position: "right",
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                },
             },
         });
     }
@@ -42,6 +66,8 @@ watch(
             chartInstance.data.labels = props.labels;
             chartInstance.data.datasets[0] &&
                 (chartInstance.data.datasets[0].data = props.dataPuffs as any);
+            chartInstance.data.datasets[1] &&
+                (chartInstance.data.datasets[1].data = props.dataManque as any);
             chartInstance.update();
         }
     },

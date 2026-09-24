@@ -6,7 +6,7 @@ import { ref } from "vue";
 import AjouterValeur from "./composant/AjouterValeur.vue";
 import CreeGout from "./composant/creeGout.vue";
 import utilisateur from "./composant/utilisateur.vue";
-import Graphiques from "./composant/graphiques.vue";
+import graphiques from "./composant/graphiques.vue";
 
 // Variable hardcodé iduser
 const iduser = ref(1);
@@ -16,7 +16,7 @@ const iduser = ref(1);
     <!-- <creeGout /> -->
     <!-- <utilisateur/> -->
     <!-- <AjouterValeur :idUser="iduser" /> -->
-    <Graphiques :idUser="iduser" />
+    <!-- <graphiques :idUser="iduser" /> -->
 </template>
 
 <style scoped></style>
