@@ -1,9 +1,14 @@
 A FAIRE : 
 
-Rework partie création gout
+Rework partie création gout (intensité gout indiqué sur la teille)
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
 Enlever partie créer utilisateur pour mettre une vrai page de login
 Améliorer UI (meme simplement des span avant les input) pour l'ajout de data dans la BD
 Grid tout les composants Pour avoir un rendu de quoi va où et bosser l'IU/UX a partir de ça
 
 Style (en dernier)
+
+
+Rework a faire apres que le site soit deja en ligne :
+
+Ajouter script pour guetter le gout et le chercher dans une API (lpv ?)

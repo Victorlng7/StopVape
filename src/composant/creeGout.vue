@@ -15,26 +15,31 @@ const optionNico = [0, 1.5, 3, 6, 12];
 const doseArome = ref("Balancé");
 const optionArome = ["Très leger", "Leger", "Balancé", "Sucré", "Intense"];
 
+const intensiteGout = ref(5);
+const optionIntensiteGout = [5, 10, 15];
 //Affichage
+
 const qte = ref(0);
 const nico = ref(0);
-const intensiteGout = ref(3);
+const doseGout = ref(3);
 
 function calculerGout(
     vol: number,
     nicotarget: number,
     concentrationGout: number,
+    intensite: number,
 ) {
     console.log(vol, nicotarget, concentrationGout);
 
     nico.value = switchNico(vol, nicotarget);
-    intensiteGout.value = switchArome(concentrationGout) * vol;
+    intensiteGout.value = switchArome(concentrationGout, intensite) * vol;
     qte.value = vol - (intensiteGout.value - nico.value);
 }
 
 function CreeGout() {
     const vol = quantiteGout.value;
     const nicotarget = doseNico.value;
+    const intensite = intensiteGout.value;
     let concentrationGout = 3;
 
     switch (doseArome.value) {
@@ -55,13 +60,11 @@ function CreeGout() {
             break;
     }
 
-    calculerGout(vol, nicotarget, concentrationGout);
+    calculerGout(vol, nicotarget, concentrationGout, intensite);
 }
 </script>
 
 <template>
-    <h1>Creation de votre gout</h1>
-
     <div class="container">
         <div class="classInput" id="qte">
             <span>Quel quantité voulez vous ?</span>
@@ -92,6 +95,19 @@ function CreeGout() {
             <select v-model="doseArome">
                 <option
                     v-for="option in optionArome"
+                    :key="option"
+                    :value="option"
+                >
+                    {{ option }}
+                </option>
+            </select>
+        </div>
+
+        <div class="classInput" id="arome">
+            <span>Intensité du gout</span>
+            <select v-model="intensiteGout">
+                <option
+                    v-for="option in optionIntensiteGout"
                     :key="option"
                     :value="option"
                 >
