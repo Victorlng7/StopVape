@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { requeteAPI } from "./script/APIrequest";
+import { calculerNbPuff } from "./script/calculerNbPuff";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -15,7 +16,7 @@ const depense = ref(0);
 const envoyerReleve = async () => {
     const reponse = await requeteAPI("ajouter_releve", {
         id: id.value,
-        relevePuff: relevePuff.value,
+        relevePuff: calculerNbPuff(relevePuff.value, id.value)
         volume_ml: volume_ml.value,
         tauxNico: tauxNico.value,
         clopesmoke: clopesmoke.value,
