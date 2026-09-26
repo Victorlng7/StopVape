@@ -52,6 +52,7 @@ switch ($action) {
 
     case 'ajouter_releve':
         $user_id = $input['id'] ?? 0;
+        $releve_puff_brut = $input['puffBrute'] ?? 0;
         $puffs = $input['relevePuff'] ?? 0;
         $volume_ml = $input['volume_ml'] ?? 0;
         $taux_nicotine = $input['tauxNico'] ?? 0;
@@ -63,23 +64,29 @@ switch ($action) {
 
         $stmt = $pdo->prepare("
             INSERT INTO suivi_quotidien 
-            (user_id, date_releve, puffs, volume_ml, taux_nicotine, cigarettes_fumees, niveau_manque, depenses_euros) 
+            (user_id, date_releve, releve_puff_brut, puffs, volume_ml, taux_nicotine, cigarettes_fumees, niveau_manque, depenses_euros) 
             VALUES 
-            (:user_id, :date_releve, :puffs, :volume_ml, :taux_nicotine, :cigarettes_fumees, :niveau_manque, :depenses_euros)
+            (:user_id, :date_releve, :releve_puff_brut, :puffs, :volume_ml, :taux_nicotine, :cigarettes_fumees, :niveau_manque, :depenses_euros)
         ");
 
-        $stmt->execute([
-            'user_id' => $user_id,
-            'date_releve' => $date_releve,
-            'puffs' => $puffs,
-            'volume_ml' => $volume_ml,
-            'taux_nicotine' => $taux_nicotine,
-            'cigarettes_fumees' => $cigarettes_fumees,
-            'niveau_manque' => $niveau_manque,
-            'depenses_euros' => $depenses
-        ]);
+        try {
+            $stmt->execute([
+                'user_id' => $user_id,
+                'date_releve' => $date_releve,
+                'releve_puff_brut' => $releve_puff_brut,
+                'puffs' => $puffs,
+                'volume_ml' => $volume_ml,
+                'taux_nicotine' => $taux_nicotine,
+                'cigarettes_fumees' => $cigarettes_fumees,
+                'niveau_manque' => $niveau_manque,
+                'depenses_euros' => $depenses
+            ]);
 
-        echo json_encode(["resultat" => "Relevé ajouté avec succès"]);
+            echo json_encode(["resultat" => "Relevé ajouté avec succès"]);
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(["erreur" => $e->getMessage()]);
+        }
         break;
 
     case 'historique_releves':

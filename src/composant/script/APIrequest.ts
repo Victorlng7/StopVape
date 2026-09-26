@@ -12,11 +12,16 @@ export async function requeteAPI(
             body: JSON.stringify(payload),
         });
 
+        const data = await reponse.json();
+
         if (!reponse.ok) {
-            throw new Error(`Erreur HTTP: ${reponse.status}`);
+            console.error("Détail du crash PHP :", data.erreur);
+            throw new Error(`Serveur : ${data.erreur || reponse.status}`);
         }
 
-        return await reponse.json();
+        return data;
+
+        // return await reponse.json();
     } catch (erreur) {
         console.error("Erreur de communication avec l'API :", erreur);
         return { erreur: "Impossible de joindre le serveur" };

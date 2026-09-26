@@ -1,6 +1,6 @@
 A FAIRE : 
 
-Rework partie création gout (intensité gout indiqué sur la teille)
+// Rework partie création gout (intensité gout indiqué sur la teille)
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
 Enlever partie créer utilisateur pour mettre une vrai page de login
 Améliorer UI (meme simplement des span avant les input) pour l'ajout de data dans la BD
