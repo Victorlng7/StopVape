@@ -5,7 +5,7 @@ import { ref } from "vue";
 //Import composants
 import AjouterValeur from "./composant/AjouterValeur.vue";
 import CreeGout from "./composant/creeGout.vue";
-import utilisateur from "./composant/utilisateur.vue";
+import utilisateur from "./login/utilisateur.vue";
 import graphiques from "./composant/graphiques.vue";
 import Stats from "./composant/Stats.vue";
 
@@ -14,8 +14,9 @@ const iduser = ref(1);
 </script>
 
 <template>
-    <creeGout />
     <utilisateur />
+    <creeGout />
+
     <AjouterValeur :idUser="iduser" />
     <graphiques :idUser="iduser" />
     <Stats :id-user="iduser" />

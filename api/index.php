@@ -17,9 +17,19 @@ $action = $input['action'] ?? '';
 
 switch ($action) {
 
-    case 'lister_utilisateurs':
-        $stmt = $pdo->query("SELECT id, nom, prenom, email FROM user");
-        echo json_encode(["resultat" => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+    case 'verifier_utilisateurs':
+        $user_mail = $input['mail'] ?? 0;
+
+        $stmt = $pdo->prepare("
+            SELECT * 
+            FROM user
+            WHERE email = :email 
+        ");
+
+        $stmt->execute(['email' => $user_mail]);
+        $releves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(["resultat" => $releves]);
         break;
 
     case 'creer_utilisateur':
