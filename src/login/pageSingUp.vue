@@ -26,17 +26,13 @@ async function VerifierInfo() {
         });
         console.log(mailValide.resultat);
 
-        if (mailValide.resultat.0) {
-            console.log(mailValide.resultat);
+        if (mailValide.resultat[0]) {
+            console.error("Email déjà utilisé");
+            console.log(mailValide.reponse);
+        } else {
+            console.log(mailValide.reponse);
+            ajouterMembre();
         }
-
-        // if (mailValide.resultat === undefined || mailValide.resultat) {
-        //     console.error("Email déjà utilisé");
-        //     console.log(mailValide.reponse);
-        // } else {
-        //     console.log(mailValide.reponse);
-        //     ajouterMembre();
-        // }
     } else {
         console.error("Une des info saisie est pas ok !");
     }
