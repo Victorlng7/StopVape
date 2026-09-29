@@ -32,6 +32,26 @@ switch ($action) {
         echo json_encode(["resultat" => $releves]);
         break;
 
+    case 'connection_utilisateur':
+        $user_mail = $input['mail'] ?? 0;
+        $user_password = $input['password'] ?? 0;
+
+        $stmt = $pdo->prepare("
+            SELECT * 
+            FROM user
+            WHERE email = :email
+        ");
+
+        $stmt->execute(['email' => $user_mail]);
+        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($user_password, $user['mot_de_passe'])) {
+            echo json_encode(["resultat" => $user]);
+        } else {
+            echo json_encode(["error" => 'Email ou MDP incorect']);
+        }
+        break;
+
     case 'creer_utilisateur':
         $nom = $input['nom'] ?? '';
         $prenom = $input['prenom'] ?? '';
