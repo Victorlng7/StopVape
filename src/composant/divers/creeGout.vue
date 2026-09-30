@@ -3,7 +3,7 @@
 import { ref } from "vue";
 
 //Import Type/Classes
-import { switchArome, switchNico } from "./script/scriptGout.ts";
+import { switchArome, switchNico } from "../script/scriptGout.ts";
 
 //Input gout
 const quantiteGout = ref(50);

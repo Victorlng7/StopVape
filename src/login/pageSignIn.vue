@@ -5,6 +5,7 @@ import { ref } from "vue";
 //import Fonction/interface
 import { requeteAPI } from "@/composant/script/APIrequest";
 
+const id = ref();
 const mail = ref("");
 const mdp = ref("");
 
@@ -17,7 +18,7 @@ async function VerifierInfo() {
             password: mdp.value,
         });
         if (connection.resultat) {
-            console.log(connection.resultat);
+            id.value = connection.resultat.id;
         }
     }
 }

@@ -3,12 +3,12 @@
 import { ref, onMounted, toRaw } from "vue";
 
 //Import composant
-import Total from "./stats/Total.vue";
-import Moyenne from "./stats/Moyenne.vue";
+import Total from "./Total.vue";
+import Moyenne from "./Moyenne.vue";
 
 //import interface / API
-import type { Relever } from "./script/Relever.ts";
-import { requeteAPI } from "./script/APIrequest.ts";
+import type { Relever } from "../script/Relever.ts";
+import { requeteAPI } from "../script/APIrequest.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);

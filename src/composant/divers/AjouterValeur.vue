@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { requeteAPI } from "./script/APIrequest";
-import { calculerNbPuff } from "./script/calculerNbPuff";
+import { requeteAPI } from "../script/APIrequest";
+import { calculerNbPuff } from "../script/calculerNbPuff";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);

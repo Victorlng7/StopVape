@@ -3,13 +3,13 @@
 import { ref, onMounted } from "vue";
 
 //Import composant
-import graphPuffTemps from "./graphiques/graphPuffTemps.vue";
-import graphVolumeTemps from "./graphiques/graphVolumeTemps.vue";
-import graphNicoTemps from "./graphiques/graphNicoTemps.vue";
+import graphPuffTemps from "./graphPuffTemps.vue";
+import graphVolumeTemps from "./graphVolumeTemps.vue";
+import graphNicoTemps from "./graphNicoTemps.vue";
 
 //import interface / API
-import type { Relever } from "./script/Relever.ts";
-import { requeteAPI } from "./script/APIrequest.ts";
+import type { Relever } from "../script/Relever.ts";
+import { requeteAPI } from "../script/APIrequest.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
