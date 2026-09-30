@@ -3,7 +3,7 @@
 import { ref } from "vue";
 
 //import Fonction/interface
-import { requeteAPI } from "@/composant/script/APIrequest";
+import { requeteAPI } from "../APIrequest";
 import { isMdp } from "./scripts/isMdp";
 import { IsMail } from "./scripts/verifMail";
 import type { Utilisateur } from "./scripts/interfaceUser";

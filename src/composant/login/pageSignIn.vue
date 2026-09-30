@@ -3,7 +3,7 @@
 import { ref } from "vue";
 
 //import Fonction/interface
-import { requeteAPI } from "@/composant/script/APIrequest";
+import { requeteAPI } from "../APIrequest";
 
 const id = ref();
 const mail = ref("");

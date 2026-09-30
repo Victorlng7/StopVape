@@ -1,0 +1,46 @@
+:root {
+    --color-bg-main: #121212;
+    --color-surface-100: #1e1e1e;
+    --color-surface-200: #252525;
+    --color-surface-300: #2e2e2e;
+
+    --color-primary-100: #ffebd6;
+    --color-primary-300: #ffb870;
+    --color-primary-500: #ff7e00;
+    --color-primary-700: #cc6500;
+    --color-primary-900: #803f00;
+    --color-primary-hover: #ff9533;
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #a3a3a3;
+    --text-muted: #666666;
+    --text-on-primary: #000000;
+
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.15);
+
+    --status-success: #388e3c;
+    --status-error: #d32f2f;
+    --status-warning: #f57c00;
+    --status-info: #0288d1;
+}
+
+@font-face {
+    font-family: "cubano";
+    src: url(polices/Cubano.ttf);
+}
+
+@font-face {
+    font-family: "outfit";
+    src: url(polices/L\ Regular.ttf);
+}
+
+@font-face {
+    font-family: "roboto";
+    src: url(polices/Roboto-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+    font-family: "russo";
+    src: url(polices/RussoOne-Regular.ttf);
+}
