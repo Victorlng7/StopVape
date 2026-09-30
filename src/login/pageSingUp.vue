@@ -22,7 +22,7 @@ async function VerifierInfo() {
         console.log("Info OK");
 
         const mailValide = await requeteAPI("verifier_utilisateurs", {
-            mail: mail.value,
+            mail: mail.value.toLowerCase(),
         });
         console.log(mailValide.resultat);
 
@@ -42,7 +42,7 @@ const ajouterMembre = async () => {
     const reponse = await requeteAPI("creer_utilisateur", {
         nom: nom.value,
         prenom: prenom.value,
-        email: mail.value,
+        email: mail.value.toLowerCase(),
         mot_de_passe: mdp.value,
     });
 

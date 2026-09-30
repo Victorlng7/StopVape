@@ -9,21 +9,24 @@ const mail = ref("");
 const mdp = ref("");
 
 async function VerifierInfo() {
-    const connection = await requeteAPI("connection_utilisateur", {
-        mail: mail.value,
-        password: mdp.value,
-    });
+    if (mail.value && mdp.value) {
+        console.log("mail & mdp rempli");
 
-    if (connection.resultat) {
-        console.log(connection.resultat);
+        const connection = await requeteAPI("connection_utilisateur", {
+            mail: mail.value.toLowerCase(),
+            password: mdp.value,
+        });
+        if (connection.resultat) {
+            console.log(connection.resultat);
+        }
     }
 }
 </script>
 
 <template>
     <div>
-        <input type="text" v-model="mail" placeholder="Mail" />
-        <input type="text" v-model="mdp" placeholder="PassWord" />
+        <input type="email" v-model="mail" placeholder="Mail" />
+        <input type="password" v-model="mdp" placeholder="PassWord" />
     </div>
 
     <div>

@@ -36,20 +36,20 @@ switch ($action) {
         $user_mail = $input['mail'] ?? 0;
         $user_password = $input['password'] ?? 0;
 
-        $stmt = $pdo->prepare("
-            SELECT * 
-            FROM user
-            WHERE email = :email
-        ");
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
 
         $stmt->execute(['email' => $user_mail]);
-        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($user_password, $user['mot_de_passe'])) {
+        if ($user && password_verify(
+            $user_password,
+            $user['mot_de_passe']
+        )) {
             echo json_encode(["resultat" => $user]);
         } else {
-            echo json_encode(["error" => 'Email ou MDP incorect']);
+            echo json_encode(["error" => error_reporting()]);
         }
+
         break;
 
     case 'creer_utilisateur':
