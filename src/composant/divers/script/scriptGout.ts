@@ -24,7 +24,7 @@ function switchIntensite(v: number, intensite: number): number {
         case 15:
             return v * 2;
         default:
-            throw new Error("l'intensité voulu est indisponible");
+            throw new Error("l'intensité voulu est indisponiblew");
     }
 }
 
