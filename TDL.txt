@@ -11,6 +11,7 @@ Améliorer UI (meme simplement des span avant les input) pour l'ajout des data d
 
 Fonctionnalitées :
 Ajouter + de stats (limite changer BD pour plus de données)
+Graphique puff / jours de la semaine
 
 Script / Securitée :
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
