@@ -6,16 +6,16 @@ import { ref } from "vue";
 import "./css/root.css";
 
 //Import composants
-
-import affichageCo from "./composant/affichage/affichageCo.vue";
+import utilisateur from "./composant/login/utilisateur.vue";
+// import affichageCo from "./composant/affichage/affichageCo.vue";
 // import AffichageDeco from "./composant/affichage/affichageDeco.vue";
 
 // Variable hardcodé iduser
-const iduser = ref(1);
+const iduser = ref(31);
 </script>
 
 <template>
-    <affichageCo />
+    <utilisateur />
 </template>
 
 <style scoped></style>

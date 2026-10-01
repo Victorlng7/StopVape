@@ -26,11 +26,21 @@ async function VerifierInfo() {
 
 <template>
     <div>
-        <input type="email" v-model="mail" placeholder="Mail" />
-        <input type="password" v-model="mdp" placeholder="PassWord" />
+        <input
+            class="inputSign"
+            type="email"
+            v-model="mail"
+            placeholder="E-Mail"
+        />
+        <input
+            class="inputSign"
+            type="password"
+            v-model="mdp"
+            placeholder="Mot de passe"
+        />
     </div>
 
     <div>
-        <button @click="VerifierInfo">Se Connecter</button>
+        <button class="Sign" @click="VerifierInfo">Se Connecter</button>
     </div>
 </template>

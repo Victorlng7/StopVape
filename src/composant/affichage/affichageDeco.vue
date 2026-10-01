@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import "./assets/styleDeco.css";
 import App from "@/App.vue";
+
+import pageSignIn from "../login/pageSignIn.vue";
+import PageSingUp from "../login/pageSingUp.vue";
 </script>
 
 <template>
@@ -17,8 +20,8 @@ import App from "@/App.vue";
                     <a class="header__link header__link--active" href="#">
                         Accueil
                     </a>
-                    <a class="header__link" href="#"> À propos </a>
-                    <a class="header__link" href="#"> Se connecter </a>
+                    <a class="header__link" @click=""> À propos </a>
+                    <a class="header__link" @click=""> Se connecter </a>
                 </nav>
             </div>
         </header>

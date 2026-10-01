@@ -1,0 +1,96 @@
+:root {
+    --color-bg-main: #121212;
+    --color-surface-100: #1e1e1e;
+    --color-surface-200: #252525;
+    --color-surface-300: #2e2e2e;
+
+    --color-primary-100: #ffebd6;
+    --color-primary-300: #ffb870;
+    --color-primary-500: #ff7e00;
+    --color-primary-700: #cc6500;
+    --color-primary-900: #803f00;
+    --color-primary-hover: #ff9533;
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #a3a3a3;
+    --text-muted: #666666;
+    --text-on-primary: #000000;
+
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.15);
+
+    --status-success: #388e3c;
+    --status-error: #d32f2f;
+    --status-warning: #f57c00;
+    --status-info: #0288d1;
+}
+
+body {
+    background-color: var(--color-bg-main);
+}
+
+main {
+    background-color: var(--color-surface-300);
+    margin: 15% 40%;
+    padding: 3em 5em;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(255, 126, 0, 0.55);
+}
+
+.blur {
+    position: absolute;
+    width: 5em;
+    padding: 5em;
+    background-color: var(--color-primary-500);
+    filter: blur(700px);
+    opacity: 0.2;
+}
+
+.blur1 {
+    top: 15%;
+    left: 25%;
+}
+.blur2 {
+    top: 45%;
+    left: 68%;
+}
+
+.titlePage {
+    color: var(--text-primary);
+    font-family: "cubano";
+    text-align: center;
+}
+
+.btnChange {
+    margin-top: 3em;
+    padding: 1em;
+    text-align: center;
+    border-radius: 15px;
+    background-color: var(--color-primary-700);
+    border: 1px solid var(--color-primary-900);
+    box-shadow: 0 0 10px rgba(255, 126, 0, 0.55);
+    font-family: "outfit";
+    font-size: 1.25em;
+    transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.btnChange:hover {
+    scale: 1.05;
+    border: 1px solid var(--color-primary-700);
+    background-color: var(--color-primary-hover);
+}
+
+.inputSign {
+    padding: 7px;
+    border: 1px solid var(--color-primary-700);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+.flex input {
+    width: 40%;
+}

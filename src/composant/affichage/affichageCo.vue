@@ -5,15 +5,13 @@ import { ref } from "vue";
 //Import composants
 import AjouterValeur from "../divers/AjouterValeur.vue";
 import creeGout from "../divers/creeGout.vue";
-import utilisateur from "../login/utilisateur.vue";
 import graphiques from "../graphiques/graphiques.vue";
 import Stats from "../stats/Stats.vue";
 
-const iduser = ref(1);
+const iduser = ref(31);
 </script>
 
 <template>
-    <!-- <utilisateur /> -->
     <creeGout />
 
     <AjouterValeur :idUser="iduser" />

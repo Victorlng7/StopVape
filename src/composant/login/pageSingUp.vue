@@ -8,17 +8,15 @@ import { isMdp } from "./scripts/isMdp";
 import { IsMail } from "./scripts/verifMail";
 import type { Utilisateur } from "./scripts/interfaceUser";
 
-const nom = ref("Doe");
-const prenom = ref("John");
-const mail = ref("johndoe@example.com");
+const nom = ref("");
+const prenom = ref("");
+const mail = ref("");
 const mdp = ref("");
 
+const inscrit = ref(false);
+
 async function VerifierInfo() {
-    if (
-        IsMail(mail.value) &&
-        /*isMdp(mdp.value) &&*/ nom.value &&
-        prenom.value
-    ) {
+    if (IsMail(mail.value) && isMdp(mdp.value) && nom.value && prenom.value) {
         console.log("Info OK");
 
         const mailValide = await requeteAPI("verifier_utilisateurs", {
@@ -47,20 +45,43 @@ const ajouterMembre = async () => {
     });
 
     if (reponse.resultat) {
-        console.log(reponse.resultat);
+        inscrit.value = true;
     }
 };
 </script>
 
 <template>
     <div>
-        <input type="text" v-model="nom" />
-        <input type="text" v-model="prenom" />
-        <input type="text" v-model="mail" />
-        <input type="text" v-model="mdp" />
+        <div class="flex">
+            <input
+                class="inputSign"
+                type="text"
+                v-model="nom"
+                placeholder="Nom"
+            />
+            <input
+                class="inputSign"
+                type="text"
+                v-model="prenom"
+                placeholder="Prénom"
+            />
+        </div>
+        <input
+            class="inputSign"
+            type="email"
+            v-model="mail"
+            placeholder="E-Mail"
+        />
+        <input
+            class="inputSign"
+            type="password"
+            v-model="mdp"
+            placeholder="Mot de passe"
+        />
     </div>
 
     <div>
-        <button @click="VerifierInfo">VerifierMembreDejala</button>
+        <button class="Sign" @click="VerifierInfo">S'inscrire</button>
+        <p v-if="inscrit">Vous êtes inscrit !</p>
     </div>
 </template>
