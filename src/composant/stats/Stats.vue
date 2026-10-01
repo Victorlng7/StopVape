@@ -9,6 +9,7 @@ import Moyenne from "./Moyenne.vue";
 //import interface / API
 import type { Relever } from "../graphiques/scripts/Relever.ts";
 import { requeteAPI } from "../APIrequest.ts";
+import { moyenne } from "./scripts/classMoyenne.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -43,6 +44,14 @@ onMounted(() => {
 
 <template>
     <Total
+        :labels="labelsDates"
+        :dataPuffs="dataPuffs"
+        :dataNico="dataNico"
+        :dataVolume="dataVolume"
+        :dataClope="dataClope"
+        :dataArgent="dataArgent"
+    />
+    <Moyenne
         :labels="labelsDates"
         :dataPuffs="dataPuffs"
         :dataNico="dataNico"

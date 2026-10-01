@@ -52,7 +52,7 @@ function assignerValeur() {
 </script>
 
 <template>
-    <p>total puff : {{ argentTemps }}</p>
-    <p>total clope : {{ puffTemps }}</p>
-    <p>total volume : {{ puffVolume }}</p>
+    <p>Argent / jours : {{ argentTemps }}</p>
+    <p>Puff / jours : {{ puffTemps }}</p>
+    <p>Volume / puff (ml) : {{ puffVolume }}</p>
 </template>

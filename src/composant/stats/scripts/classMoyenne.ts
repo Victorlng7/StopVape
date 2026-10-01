@@ -28,13 +28,13 @@ export class moyenne {
 
     //Getters values
 
-    get argentJour(): number {
+    get argentTemps(): number {
         return this.argentTotal / this.dureeTotal;
     }
-    get puffJour(): number {
+    get puffTemps(): number {
         return this.totalPuff / this.dureeTotal;
     }
     get puffVolume(): number {
-        return this.totalPuff / this.totalVolume;
+        return this.totalVolume / this.totalPuff;
     }
 }
