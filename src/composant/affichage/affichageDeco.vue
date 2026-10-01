@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import "./assets/styleDeco.css";
-import App from "@/App.vue";
+const props = defineProps(["affichage"]);
 
-import pageSignIn from "../login/pageSignIn.vue";
-import PageSingUp from "../login/pageSingUp.vue";
+function changeAffichage() {
+    props.affichage[0] = false;
+    props.affichage[1] = true;
+}
 </script>
 
 <template>
@@ -21,7 +22,9 @@ import PageSingUp from "../login/pageSingUp.vue";
                         Accueil
                     </a>
                     <a class="header__link" @click=""> À propos </a>
-                    <a class="header__link" @click=""> Se connecter </a>
+                    <a class="header__link" @click="changeAffichage">
+                        Se connecter
+                    </a>
                 </nav>
             </div>
         </header>

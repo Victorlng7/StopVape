@@ -9,16 +9,16 @@ const id = ref();
 const mail = ref("");
 const mdp = ref("");
 
+const emit = defineEmits(["id", "connecter"]);
+
 async function VerifierInfo() {
     if (mail.value && mdp.value) {
-        console.log("mail & mdp rempli");
-
         const connection = await requeteAPI("connection_utilisateur", {
             mail: mail.value.toLowerCase(),
             password: mdp.value,
         });
         if (connection.resultat) {
-            id.value = connection.resultat.id;
+            emit("id", connection.resultat.id, "connecter", true);
         }
     }
 }

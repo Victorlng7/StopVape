@@ -10,6 +10,9 @@ import "./assets/styleUser.css";
 import pageSingUp from "./pageSingUp.vue";
 import pageSignIn from "./pageSignIn.vue";
 
+const props = defineProps(["affichage"]);
+const emit = defineEmits(['id'])
+
 const vSi = ref(true);
 const vSu = ref(false);
 
@@ -25,6 +28,14 @@ function changerV(){
     }
     
 }
+
+function changerId(id:number){
+    console.log("Id récupérer ", id)
+    emit('id',id)
+    console.log('changerconnection')
+    props.affichage[1] = false;
+    props.affichage[2] = true;
+}
 </script>
 
 <template>
@@ -36,7 +47,7 @@ function changerV(){
         <h1 class="titlePage" v-if="vSu">S'inscrire</h1>
         <article>
             <div v-if="vSi">
-                <pageSignIn />
+                <pageSignIn @id="changerId" />
             </div>
             <div v-if="vSu">
                 <pageSingUp />
