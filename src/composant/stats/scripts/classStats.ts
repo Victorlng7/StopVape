@@ -7,22 +7,21 @@ export class stats {
     public nico: number[];
     public clope: number[];
     public volume: number[];
+    public argent: number[];
 
-    constructor(
-        label: string[],
-        puff: number[],
-        nico: number[],
-        clope: number[],
-        volume: number[],
-    ) {
-        this.label = label;
-        this.puff = puff;
-        this.nico = nico;
-        this.clope = clope;
-        this.volume = volume;
+    constructor() {
+        this.label = [];
+        this.puff = [];
+        this.nico = [];
+        this.clope = [];
+        this.volume = [];
+        this.argent = [];
     }
     //Get values
 
+    get totalArgent(): number {
+        return addTab(this.argent);
+    }
     get totalPuff(): number {
         return addTab(this.puff);
     }

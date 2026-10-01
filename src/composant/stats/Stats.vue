@@ -19,6 +19,7 @@ const dataPuffs = ref<number[]>([]);
 const dataVolume = ref<number[]>([]);
 const dataClope = ref<number[]>([]);
 const dataNico = ref<number[]>([]);
+const dataArgent = ref<number[]>([]);
 
 const chargerHistorique = async () => {
     const data = await requeteAPI("historique_releves", { id: id.value });
@@ -31,6 +32,7 @@ const chargerHistorique = async () => {
         dataVolume.value = historique.map((r) => r.volume_ml);
         dataClope.value = historique.map((r) => r.cigarettes_fumees);
         dataNico.value = historique.map((r) => r.taux_nicotine);
+        dataArgent.value = historique.map((r) => r.depenses_euros);
     }
 };
 
@@ -46,5 +48,6 @@ onMounted(() => {
         :dataNico="dataNico"
         :dataVolume="dataVolume"
         :dataClope="dataClope"
+        :dataArgent="dataArgent"
     />
 </template>

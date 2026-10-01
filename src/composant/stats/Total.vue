@@ -15,7 +15,7 @@ const props = defineProps<{
     dataClope: number[];
 }>();
 
-const s = new stats([], [], [], [], []);
+const s = new stats();
 
 const totalPuff = ref(0);
 const totalClope = ref(0);
