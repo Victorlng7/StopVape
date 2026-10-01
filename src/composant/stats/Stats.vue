@@ -7,8 +7,8 @@ import Total from "./Total.vue";
 import Moyenne from "./Moyenne.vue";
 
 //import interface / API
-import type { Relever } from "../script/Relever.ts";
-import { requeteAPI } from "../script/APIrequest.ts";
+import type { Relever } from "../graphiques/scripts/Relever.ts";
+import { requeteAPI } from "../APIrequest.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);

@@ -3,7 +3,6 @@ import "./assets/styleDeco.css";
 import App from "@/App.vue";
 </script>
 
-```vue
 <template>
     <div class="page">
         <!-- En-tête -->

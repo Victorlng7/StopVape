@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition: 0.3s ease;
 }
 
 html {
@@ -288,10 +289,11 @@ a {
 .hero__badge,
 .section__badge,
 .get-started__badge {
+    scale: 1.2;
     display: inline-flex;
     align-items: center;
 
-    padding: 7px 13px;
+    padding: 10px 15px;
 
     border: 1px solid rgba(255, 126, 0, 0.22);
 
