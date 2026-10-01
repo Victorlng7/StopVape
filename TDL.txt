@@ -2,6 +2,7 @@ A FAIRE :
 
 Général :
 Enlever partie créer utilisateur pour mettre une vrai page de login
+Page "mot de passe oublier"
 // Rework partie création gout (intensité gout indiqué sur la teille)
 Style (en dernier)
 
@@ -16,6 +17,8 @@ Graphique puff / jours de la semaine
 Script / Securitée :
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
 Ajouter liste de caractère qu'on peut saisir pour un email idem pour mdp
+Vérification de l'adresse mail pour pas surcharger 
+Ajout captcha pour pas blew le serveur / Attaque ddos
 Verification de l'email avant de le send a la BD pour éviter injeciton sql
 
 Rework (apres que le site soit release) :
