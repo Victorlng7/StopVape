@@ -21,6 +21,8 @@ const totalPuff = ref(0);
 const totalClope = ref(0);
 const totalVolume = ref(0);
 const tempsSevrage = ref(0);
+const totalArgent = ref(0);
+
 watch(
     () => props.dataPuffs,
     () => {
@@ -51,6 +53,7 @@ function assignerValeur() {
     totalClope.value = s.totalClope;
     totalVolume.value = s.totalVolume;
     tempsSevrage.value = s.tempsSevrage;
+    totalArgent.value = s.totalArgent;
 }
 </script>
 
@@ -58,5 +61,6 @@ function assignerValeur() {
     <p>total puff : {{ totalPuff }}</p>
     <p>total clope : {{ totalClope }}</p>
     <p>total volume : {{ totalVolume }}</p>
+    <p>total argent dépensé : {{ totalArgent }}</p>
     <p>temps sevrage (jours) : {{ tempsSevrage }}</p>
 </template>
