@@ -8,13 +8,13 @@ function changeAffichage() {
 </script>
 
 <template>
-    <div class="page">
+    <div class="page landing-page">
         <!-- En-tête -->
         <header class="header">
             <div class="header__container">
                 <div class="header__brand">
                     <span class="header__title">StopSmoke</span>
-                    <img class="header__logo" src="" alt="Logo StopSmoke" />
+                    <span class="header__logo" aria-hidden="true">S</span>
                 </div>
 
                 <nav class="header__nav">
@@ -38,8 +38,8 @@ function changeAffichage() {
                     >
 
                     <h1 class="hero__title">
-                        Vous souhaitez réduire ou arrêter votre consommation de
-                        cigarette électronique ?
+                        Un suivi clair pour
+                        <strong>réduire votre consommation.</strong>
                     </h1>
 
                     <p class="hero__description">
@@ -57,6 +57,42 @@ function changeAffichage() {
                         </a>
                     </div>
                 </div>
+
+                <aside
+                    class="hero__preview"
+                    aria-label="Aperçu du suivi quotidien"
+                >
+                    <div class="preview__topbar">
+                        <span class="preview__brand">StopSmoke.</span>
+                        <span class="preview__live">Suivi personnel</span>
+                    </div>
+                    <div class="preview__metrics">
+                        <div class="preview__metric">
+                            <span>TAFFES AUJOURD'HUI</span>
+                            <strong>126</strong>
+                        </div>
+                        <div class="preview__metric">
+                            <span>ÉVOLUTION</span>
+                            <strong>-18%</strong>
+                        </div>
+                        <div class="preview__metric">
+                            <span>JOURS SUIVIS</span>
+                            <strong>24</strong>
+                        </div>
+                    </div>
+                    <div class="preview__chart">
+                        <p class="preview__chart-label"
+                            >Consommation · 8 derniers jours</p
+                        >
+                        <div class="preview__bars" aria-hidden="true">
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                            ><i></i>
+                        </div>
+                        <div class="preview__footer">
+                            <span>J-7</span><span>AUJOURD'HUI</span>
+                        </div>
+                    </div>
+                </aside>
             </section>
 
             <!-- Fonctionnalités -->

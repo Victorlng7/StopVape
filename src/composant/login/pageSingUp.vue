@@ -51,19 +51,21 @@ const ajouterMembre = async () => {
 </script>
 
 <template>
-    <div>
+    <div class="auth-fields">
         <div class="flex">
             <input
                 class="inputSign"
                 type="text"
                 v-model="nom"
                 placeholder="Nom"
+                autocomplete="family-name"
             />
             <input
                 class="inputSign"
                 type="text"
                 v-model="prenom"
                 placeholder="Prénom"
+                autocomplete="given-name"
             />
         </div>
         <input
@@ -71,16 +73,18 @@ const ajouterMembre = async () => {
             type="email"
             v-model="mail"
             placeholder="E-Mail"
+            autocomplete="email"
         />
         <input
             class="inputSign"
             type="password"
             v-model="mdp"
             placeholder="Mot de passe"
+            autocomplete="new-password"
         />
     </div>
 
-    <div>
+    <div class="auth-submit">
         <button class="Sign" @click="VerifierInfo">S'inscrire</button>
         <p v-if="inscrit">Vous êtes inscrit !</p>
     </div>

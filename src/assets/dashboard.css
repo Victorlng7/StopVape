@@ -1,0 +1,321 @@
+.dashboard-page {
+    width: min(1480px, calc(100% - 2 * var(--page-gutter)));
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 42px 0 64px;
+}
+
+.dashboard-heading {
+    position: relative;
+    margin-bottom: 24px;
+    padding: 24px 28px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--color-primary-500);
+    background: linear-gradient(
+        100deg,
+        rgba(255, 126, 0, 0.11),
+        rgba(30, 30, 30, 0.92) 46%
+    );
+}
+
+.dashboard-heading::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36%;
+    height: 100%;
+    border-left: 1px solid rgba(255, 255, 255, 0.035);
+    background: repeating-linear-gradient(
+        135deg,
+        transparent 0 12px,
+        rgba(255, 255, 255, 0.025) 12px 13px
+    );
+    content: "";
+    pointer-events: none;
+}
+
+.dashboard-eyebrow {
+    margin: 0 0 6px;
+    color: var(--color-primary-300);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+}
+
+.dashboard-heading h1 {
+    margin: 0;
+    font-family: "cubano", "outfit", sans-serif;
+    font-size: 2.4rem;
+    line-height: 1.15;
+}
+
+.dashboard-heading > p:last-child {
+    margin: 7px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+}
+
+.dashboard-panel {
+    min-width: 0;
+    padding: 21px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background: linear-gradient(
+        145deg,
+        rgba(35, 35, 35, 0.98),
+        rgba(25, 25, 25, 0.98)
+    );
+    box-shadow: var(--shadow-small);
+}
+
+.dashboard-panel > h2 {
+    margin: 0 0 17px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+    font-family: "cubano", "outfit", sans-serif;
+    font-size: 1.13rem;
+}
+
+.recipeComp .container {
+    height: 100%;
+    grid-template-rows: repeat(2, minmax(75px, 1fr));
+    gap: 11px;
+}
+
+.recipeComp .classInput {
+    min-width: 0;
+    padding: 10px;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.13);
+}
+
+.recipeComp .classInput span {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+.recipeComp select,
+.entryComp input,
+.entryComp select {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-medium);
+    border-radius: 5px;
+    background: #171717;
+    color: var(--text-primary);
+}
+
+.recipeComp select:focus,
+.entryComp input:focus,
+.entryComp select:focus {
+    border-color: var(--color-primary-500);
+    outline: 2px solid rgba(255, 126, 0, 0.13);
+}
+
+.recipeComp #validation button,
+.entryComp > button {
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--color-primary-500);
+    border-radius: 5px;
+    background: var(--color-primary-500);
+    color: #17120d;
+    cursor: pointer;
+    font-weight: 700;
+    transition:
+        background var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.recipeComp #validation button:hover,
+.entryComp > button:hover {
+    transform: translateY(-1px);
+    background: var(--color-primary-hover);
+}
+
+.recipeComp > p {
+    margin: 13px 0 0;
+    color: var(--color-primary-300);
+    font-family: "russo", sans-serif;
+    font-size: 0.88rem;
+}
+
+.entryComp .form-container {
+    max-width: none;
+    margin: 0;
+    gap: 10px;
+}
+
+.entryComp .form-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(95px, 0.65fr);
+    align-items: center;
+    gap: 9px;
+}
+
+.entryComp .form-group span {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+
+.entryComp > button {
+    margin: 14px 8px 0 0;
+}
+
+.entryComp > button:first-of-type {
+    border-color: var(--border-medium);
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.entryComp > button:first-of-type:hover {
+    border-color: var(--color-primary-500);
+    color: var(--text-primary);
+}
+
+.graphiqueComp {
+    padding-bottom: 18px;
+}
+
+.graphiqueComp .dashboard-container {
+    display: grid;
+    gap: 12px;
+}
+
+.graphiqueComp .dashboard-container > div {
+    width: 100% !important;
+    height: 220px !important;
+    padding: 8px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.16);
+}
+
+.graphiqueComp canvas {
+    max-width: 100%;
+}
+
+.statsComp {
+    display: grid;
+    align-content: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.statsComp > h2 {
+    grid-column: 1 / -1;
+}
+
+.statsComp > p {
+    min-width: 0;
+    min-height: 74px;
+    margin: 0;
+    padding: 13px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.14);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    overflow-wrap: anywhere;
+}
+
+.statsComp > p::first-line {
+    color: var(--color-primary-300);
+    font-family: "russo", sans-serif;
+    font-size: 1rem;
+}
+
+@media (max-width: 920px) {
+    .dashboard-page {
+        width: min(100% - 32px, 760px);
+        padding-top: 28px;
+    }
+
+    .dashboard-heading h1 {
+        font-size: 2.15rem;
+    }
+
+    .mainConnection {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+    }
+
+    .recipeComp,
+    .entryComp {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+
+    .graphiqueComp,
+    .statsComp {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 620px) {
+    .dashboard-page {
+        width: calc(100% - 24px);
+        padding: 18px 0 36px;
+    }
+
+    .dashboard-heading {
+        margin-bottom: 12px;
+        padding: 19px;
+    }
+
+    .dashboard-heading h1 {
+        font-size: 1.8rem;
+    }
+
+    .mainConnection {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+    }
+
+    .recipeComp,
+    .entryComp,
+    .graphiqueComp,
+    .statsComp {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .dashboard-panel {
+        padding: 16px;
+    }
+
+    .dashboard-page .recipeComp .container {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-template-rows: auto !important;
+    }
+
+    .dashboard-page .recipeComp #arome {
+        grid-column: span 1 !important;
+    }
+
+    .dashboard-page .recipeComp #validation {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+    }
+
+    .recipeComp #validation button {
+        width: 100%;
+    }
+
+    .entryComp .form-group {
+        grid-template-columns: minmax(0, 1fr) minmax(90px, 0.8fr);
+    }
+
+    .graphiqueComp .dashboard-container > div {
+        height: 205px !important;
+    }
+}

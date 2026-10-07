@@ -25,22 +25,24 @@ async function VerifierInfo() {
 </script>
 
 <template>
-    <div>
+    <div class="auth-fields">
         <input
             class="inputSign"
             type="email"
             v-model="mail"
             placeholder="E-Mail"
+            autocomplete="email"
         />
         <input
             class="inputSign"
             type="password"
             v-model="mdp"
             placeholder="Mot de passe"
+            autocomplete="current-password"
         />
     </div>
 
-    <div>
+    <div class="auth-submit">
         <button class="Sign" @click="VerifierInfo">Se Connecter</button>
     </div>
 </template>

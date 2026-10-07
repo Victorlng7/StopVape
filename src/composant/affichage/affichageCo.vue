@@ -25,12 +25,34 @@ watch(
 );
 </script>
 
-<template class="mainConnection">
-    <creeGout />
+<template>
+    <main class="dashboard-page">
+        <header class="dashboard-heading">
+            <p class="dashboard-eyebrow">ESPACE PERSONNEL</p>
+            <h1>Votre suivi</h1>
+            <p>Vos habitudes, vos données et vos progrès au même endroit.</p>
+        </header>
 
-    <AjouterValeur :idUser="iduser" />
-    <graphiques :idUser="iduser" class="graphiqueComp" />
-    <Stats :id-user="iduser" class="statsComp" />
+        <div class="mainConnection">
+            <section class="dashboard-panel recipeComp">
+                <creeGout />
+            </section>
+
+            <section class="dashboard-panel entryComp">
+                <AjouterValeur :idUser="iduser" />
+            </section>
+
+            <section class="dashboard-panel graphiqueComp">
+                <h2>Évolution</h2>
+                <graphiques :idUser="iduser" />
+            </section>
+
+            <section class="dashboard-panel statsComp">
+                <h2>Vos statistiques</h2>
+                <Stats :id-user="iduser" />
+            </section>
+        </div>
+    </main>
 </template>
 
 <style scoped></style>

@@ -6,6 +6,7 @@ import { ref } from "vue";
 import "./assets/root.css";
 import "./assets/styleGlobale.css";
 import "./assets/grid.css";
+import "./assets/dashboard.css";
 
 //Import composants
 import utilisateur from "./composant/login/utilisateur.vue";

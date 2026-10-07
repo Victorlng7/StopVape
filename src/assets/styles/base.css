@@ -1,0 +1,92 @@
+:root {
+    --container-width: 1240px;
+    --page-gutter: clamp(20px, 5vw, 76px);
+    --radius-small: 8px;
+    --radius-medium: 14px;
+    --radius-large: 22px;
+    --transition-fast: 180ms ease;
+    --transition-normal: 280ms ease;
+    --shadow-small: 0 12px 35px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    background: var(--color-bg-main);
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        var(--color-bg-main);
+    background-size: 42px 42px;
+    color: var(--text-primary);
+    font-family: "outfit", "roboto", sans-serif;
+    line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+::selection {
+    background: var(--color-primary-500);
+    color: var(--text-on-primary);
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid var(--color-bg-main);
+    border-radius: 8px;
+    background: var(--color-surface-300);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-700);
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
