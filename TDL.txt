@@ -1,18 +1,19 @@
 A FAIRE : 
 
 Général :
-Enlever partie créer utilisateur pour mettre une vrai page de login
 Page "mot de passe oublier"
+//Enlever partie créer utilisateur pour mettre une vrai page de login
 // Rework partie création gout (intensité gout indiqué sur la teille)
-Style (en dernier)
+// Style
 
 Visuel :
-Grid tout les composants Pour avoir un rendu de quoi va où et bosser l'IU/UX a partir de ça
-Améliorer UI (meme simplement des span avant les input) pour l'ajout des data dans la BD
+//Grid tout les composants Pour avoir un rendu de quoi va où et bosser l'IU/UX a partir de ça
+//Améliorer UI (meme simplement des span avant les input) pour l'ajout des data dans la BD
 
 Fonctionnalitées :
 Ajouter + de stats (limite changer BD pour plus de données)
 Graphique puff / jours de la semaine
+Changer le nombre de taffes possible sur la CE (nouvelle table SQL + possibilité changer la valeur)
 
 Script / Securitée :
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
@@ -22,4 +23,4 @@ Ajout captcha pour pas blew le serveur / Attaque ddos
 Verification de l'email avant de le send a la BD pour éviter injeciton sql
 
 Rework (apres que le site soit release) :
-Ajouter script pour guetter le gout (et le chercher dans une API belek lpv ?)
+Ajouter script pour guetter le gout (et le chercher dans une API belek lpv ?) pour le %req
