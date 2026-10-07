@@ -8,6 +8,8 @@ import { calculerNbPuff } from "./script/calculerNbPuff.ts";
 import type { Relever } from "../Relever.ts";
 
 //Import fonction Actualiser données site
+import { chargerDonneeGraph } from "../graphiques/scripts/useGraph.ts";
+import { chargerDonneeStats } from "../stats/scripts/useStats.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -56,8 +58,8 @@ const envoyerReleve = async () => {
 };
 
 function actualiserData() {
-    chargerDonneeGraph();
-    chargerDonneeStats();
+    chargerDonneeGraph(id.value);
+    chargerDonneeStats(id.value);
 }
 
 function viderZoneSaisie() {
