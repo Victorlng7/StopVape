@@ -1,43 +1,29 @@
 <script setup lang="ts">
-//Import vue
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 
-//Import composant
+// Import des composants
 import graphPuffTemps from "./graphPuffTemps.vue";
 import graphVolumeTemps from "./graphVolumeTemps.vue";
 import graphNicoTemps from "./graphNicoTemps.vue";
 
-//import interface / API
-import { chargerHistorique } from "../chargerHistorique.ts";
+// Import des variables et de la fonction depuis le fichier partagé
+import {
+    labelsDates,
+    dataPuffs,
+    dataVolume,
+    dataClope,
+    dataNico,
+    dataManque,
+    dataArgent,
+    chargerDonneeGraph,
+} from "./scripts/useGraph.ts";
 
 const props = defineProps(["idUser"]);
-const id = ref(props.idUser);
-
-// Variables réactives pour stocker les données découpées
-const labelsDates = ref<string[]>([]);
-const dataPuffs = ref<number[]>([]);
-const dataVolume = ref<number[]>([]);
-const dataClope = ref<number[]>([]);
-const dataNico = ref<number[]>([]);
-const dataManque = ref<number[]>([]);
-const dataArgent = ref<number[]>([]);
 
 onMounted(() => {
-    chargerDonnee();
+    // On passe directement l'ID de la prop
+    chargerDonneeGraph(props.idUser);
 });
-
-const chargerDonnee = async () => {
-    const historique = await chargerHistorique(id.value);
-
-    if (historique) {
-        labelsDates.value = historique.map((r) => r.date_releve);
-        dataPuffs.value = historique.map((r) => r.puffs);
-        dataVolume.value = historique.map((r) => r.volume_ml);
-        dataClope.value = historique.map((r) => r.cigarettes_fumees);
-        dataNico.value = historique.map((r) => r.taux_nicotine);
-        dataArgent.value = historique.map((r) => r.depenses_euros);
-    }
-};
 </script>
 
 <template>

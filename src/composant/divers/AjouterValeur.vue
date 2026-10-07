@@ -1,8 +1,13 @@
 <script setup lang="ts">
+//improt vue
 import { ref } from "vue";
+
+//Import funcion / type
 import { requeteAPI } from "../APIrequest.ts";
 import { calculerNbPuff } from "./script/calculerNbPuff.ts";
-import type { Relever } from "../graphiques/scripts/Relever.ts";
+import type { Relever } from "../Relever.ts";
+
+//Import fonction Actualiser données site
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -43,11 +48,17 @@ const envoyerReleve = async () => {
         if (reponse.resultat) {
             alert("Information ajouté avec succes");
             viderZoneSaisie();
+            actualiserData();
         }
     } else {
         alert("Problème au niveau de la BD");
     }
 };
+
+function actualiserData() {
+    chargerDonneeGraph();
+    chargerDonneeStats();
+}
 
 function viderZoneSaisie() {
     const tabSaisie = [

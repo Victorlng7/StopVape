@@ -1,5 +1,5 @@
 import { requeteAPI } from "../../APIrequest.ts";
-import type { Relever } from "../../graphiques/scripts/Relever.ts";
+import type { Relever } from "../../Relever.ts";
 
 export async function calculerNbPuff(
     puffBrut: number,
