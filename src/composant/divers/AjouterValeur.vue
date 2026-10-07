@@ -14,24 +14,60 @@ const clopesmoke = ref(0);
 const manque = ref(0);
 const depense = ref(0);
 
+const idSuivi = ref(0);
+
 const envoyerReleve = async () => {
     const puffsCalcules = await calculerNbPuff(relevePuff.value, id.value);
 
-    const reponse = await requeteAPI("ajouter_releve", {
-        id: id.value,
-        puffBrute: relevePuff.value,
-        relevePuff: puffsCalcules,
-        volume_ml: volume_ml.value,
-        tauxNico: tauxNico.value,
-        clopesmoke: clopesmoke.value,
-        manque: manque.value,
-        depense: depense.value,
-    });
+    if (idSuivi.value === 0) {
+        const reponse = await requeteAPI("ajouter_releve", {
+            id: id.value,
+            puffBrute: relevePuff.value,
+            relevePuff: puffsCalcules,
+            volume_ml: volume_ml.value,
+            tauxNico: tauxNico.value,
+            clopesmoke: clopesmoke.value,
+            manque: manque.value,
+            depense: depense.value,
+        });
+        if (reponse.resultat) {
+            alert("Information ajouté avec succes");
+        }
+    } else {
+        const reponse = await requeteAPI("modifier_releve", {
+            id: idSuivi.value,
+            puffBrute: relevePuff.value,
+            relevePuff: puffsCalcules,
+            volume_ml: volume_ml.value,
+            tauxNico: tauxNico.value,
+            clopesmoke: clopesmoke.value,
+            manque: manque.value,
+            depense: depense.value,
+        });
+        if (reponse.resultat) {
+            alert("Information modifié avec succes");
+        }
 
-    if (reponse.resultat) {
-        alert("Information ajouté avec succes");
+        idSuivi.value = 0;
     }
+
+    viderZoneSaisie();
 };
+
+function viderZoneSaisie() {
+    const tabSaisie = [
+        relevePuff,
+        volume_ml,
+        tauxNico,
+        clopesmoke,
+        manque,
+        depense,
+    ];
+
+    tabSaisie.forEach((element) => {
+        element.value = 0;
+    });
+}
 
 const chargerLastRel = async () => {
     const data = await requeteAPI("dernier_releves", { id: id.value });
@@ -47,6 +83,8 @@ const chargerLastRel = async () => {
         clopesmoke.value = releve?.cigarettes_fumees ?? 0;
         manque.value = releve?.niveau_manque ?? 0;
         depense.value = releve?.depenses_euros ?? 0;
+
+        idSuivi.value = releve?.id ?? 0;
     }
 };
 </script>

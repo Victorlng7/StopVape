@@ -27,6 +27,43 @@ switch ($action) {
         echo json_encode(["resultat" => $releves]);
         break;
 
+    case 'modifier_releve':
+        $puffBrute = $input['puffBrute'] ?? '';
+        $relevePuff = $input['relevePuff'] ?? '';
+        $volume_ml = $input['volume_ml'] ?? '';
+        $tauxNico = $input['tauxNico'] ?? '';
+        $clopesmoke = $input['clopesmoke'] ?? '';
+        $manque = $input['manque'] ?? '';
+        $depense = $input['depense'] ?? '';
+        $id = $input['id'] ?? '';
+
+        $stmt = $pdo->prepare("
+            UPDATE suivi_quotidien 
+            SET releve_puff_brut = :releve_puff_brut, 
+                puffs = :puffs, 
+                volume_ml = :volume_ml, 
+                taux_nicotine = :taux_nicotine,
+                cigarettes_fumees = :cigarettes_fumees,
+                niveau_manque = :niveau_manque,
+                depenses_euros = :depenses_euros
+            WHERE id = :id
+        ");
+
+        $stmt->execute([
+            'releve_puff_brut'  => $puffBrute,
+            'puffs'             => $relevePuff,
+            'volume_ml'         => $volume_ml,
+            'taux_nicotine'     => $tauxNico,
+            'cigarettes_fumees' => $clopesmoke,
+            'niveau_manque'     => $manque,
+            'depenses_euros'    => $depense,
+            'id'                => $id
+        ]);
+        $releves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(["resultat" => $releves]);
+        break;
+
     case 'verifier_utilisateurs':
         $user_mail = $input['mail'] ?? 0;
 
