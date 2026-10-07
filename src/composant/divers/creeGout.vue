@@ -90,7 +90,7 @@ function CreeGout() {
                 </option>
             </select>
         </div>
-        <div class="classInput" id="arome">
+        <div class="classInput" id="darome">
             <span>Intensité du gout</span>
             <select v-model="doseArome">
                 <option
@@ -103,7 +103,7 @@ function CreeGout() {
             </select>
         </div>
 
-        <div class="classInput" id="arome">
+        <div class="classInput" id="iarome">
             <span>Intensité du gout</span>
             <select v-model="intensiteGout">
                 <option
@@ -120,17 +120,52 @@ function CreeGout() {
             <span>Vous avez fini ?</span>
             <button @click="CreeGout">Preparer votre E-liquide</button>
         </div>
+        <div class="classInput" id="result">
+            <p>{{ qte }} {{ doseNico }} {{ intensiteGout }} </p>
+        </div>
     </div>
-
-    <p>{{ qte }} {{ doseNico }} {{ intensiteGout }} </p>
 </template>
 
 <style scoped>
 .container {
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 8px;
+}
+
+#darome {
+    grid-column: span 2 / span 2;
+}
+
+#iarome {
+    grid-column: span 2 / span 2;
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+#validation {
+    grid-column: span 2 / span 2;
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
+#qte {
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+
+#nico {
+    grid-column-start: 4;
+    grid-row-start: 1;
+}
+
+#result {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 2;
+    grid-row-start: 3;
 }
 .classInput {
     display: flex;
@@ -139,14 +174,5 @@ function CreeGout() {
 }
 .classInput select {
     text-align: center;
-}
-
-#arome {
-    grid-column: span 2 / span 2;
-}
-#validation {
-    grid-column: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 2;
 }
 </style>
