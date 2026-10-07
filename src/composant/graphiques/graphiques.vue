@@ -8,8 +8,7 @@ import graphVolumeTemps from "./graphVolumeTemps.vue";
 import graphNicoTemps from "./graphNicoTemps.vue";
 
 //import interface / API
-import type { Relever } from "./scripts/Relever.ts";
-import { requeteAPI } from "../APIrequest.ts";
+import { chargerHistorique } from "../chargerHistorique.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -21,25 +20,24 @@ const dataVolume = ref<number[]>([]);
 const dataClope = ref<number[]>([]);
 const dataNico = ref<number[]>([]);
 const dataManque = ref<number[]>([]);
+const dataArgent = ref<number[]>([]);
 
-const chargerHistoriques = async () => {
-    const data = await requeteAPI("historique_releves", { id: id.value });
+onMounted(() => {
+    chargerDonnee();
+});
 
-    if (data.resultat) {
-        const historique = data.resultat as Relever[];
+const chargerDonnee = async () => {
+    const historique = await chargerHistorique(id.value);
 
+    if (historique) {
         labelsDates.value = historique.map((r) => r.date_releve);
         dataPuffs.value = historique.map((r) => r.puffs);
         dataVolume.value = historique.map((r) => r.volume_ml);
         dataClope.value = historique.map((r) => r.cigarettes_fumees);
         dataNico.value = historique.map((r) => r.taux_nicotine);
-        dataManque.value = historique.map((r) => r.niveau_manque);
+        dataArgent.value = historique.map((r) => r.depenses_euros);
     }
 };
-
-onMounted(() => {
-    chargerHistoriques();
-});
 </script>
 
 <template>

@@ -7,9 +7,10 @@ import Total from "./Total.vue";
 import Moyenne from "./Moyenne.vue";
 
 //import interface / API
-import type { Relever } from "../graphiques/scripts/Relever.ts";
+import type { Relever } from "../Relever.ts";
 import { requeteAPI } from "../APIrequest.ts";
 import { moyenne } from "./scripts/classMoyenne.ts";
+import { chargerHistorique } from "../chargerHistorique.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -22,12 +23,14 @@ const dataClope = ref<number[]>([]);
 const dataNico = ref<number[]>([]);
 const dataArgent = ref<number[]>([]);
 
-const chargerHistorique = async () => {
-    const data = await requeteAPI("historique_releves", { id: id.value });
+onMounted(() => {
+    chargerDonnee();
+});
 
-    if (data.resultat) {
-        const historique = data.resultat as Relever[];
+const chargerDonnee = async () => {
+    const historique = await chargerHistorique(id.value);
 
+    if (historique) {
         labelsDates.value = historique.map((r) => r.date_releve);
         dataPuffs.value = historique.map((r) => r.puffs);
         dataVolume.value = historique.map((r) => r.volume_ml);
@@ -36,10 +39,6 @@ const chargerHistorique = async () => {
         dataArgent.value = historique.map((r) => r.depenses_euros);
     }
 };
-
-onMounted(() => {
-    chargerHistorique();
-});
 </script>
 
 <template>
