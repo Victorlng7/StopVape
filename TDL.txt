@@ -1,10 +1,13 @@
 A FAIRE : 
 
+V1 :
+
 Général :
 Page "mot de passe oublier"
 //Enlever partie créer utilisateur pour mettre une vrai page de login
 // Rework partie création gout (intensité gout indiqué sur la teille)
 // Style
+Style des graphiques a changer
 
 Visuel :
 //Grid tout les composants Pour avoir un rendu de quoi va où et bosser l'IU/UX a partir de ça
@@ -22,5 +25,6 @@ Vérification de l'adresse mail pour pas surcharger
 Ajout captcha pour pas blew le serveur / Attaque ddos
 Verification de l'email avant de le send a la BD pour éviter injeciton sql
 
+V2 : 
 Rework (apres que le site soit release) :
 Ajouter script pour guetter le gout (et le chercher dans une API belek lpv ?) pour le %req
