@@ -3,7 +3,9 @@
 import { ref } from "vue";
 
 //Import Style
-import "./css/root.css";
+import "./assets/root.css";
+import "./assets/styleGlobale.css";
+import "./assets/grid.css";
 
 //Import composants
 import utilisateur from "./composant/login/utilisateur.vue";

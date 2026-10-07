@@ -25,12 +25,12 @@ watch(
 );
 </script>
 
-<template>
+<template class="mainConnection">
     <creeGout />
 
     <AjouterValeur :idUser="iduser" />
-    <graphiques :idUser="iduser" />
-    <Stats :id-user="iduser" />
+    <graphiques :idUser="iduser" class="graphiqueComp" />
+    <Stats :id-user="iduser" class="statsComp" />
 </template>
 
 <style scoped></style>
