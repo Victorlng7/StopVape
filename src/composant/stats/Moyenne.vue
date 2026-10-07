@@ -52,7 +52,7 @@ function assignerValeur() {
 </script>
 
 <template>
-    <p>Argent / jours : {{ argentTemps }}</p>
-    <p>Puff / jours : {{ puffTemps }}</p>
-    <p>Volume / puff (µl) : {{ puffVolume }}</p>
+    <p>Argent / jours : {{ argentTemps.toFixed(2) }}</p>
+    <p>Puff / jours : {{ puffTemps.toFixed(2) }}</p>
+    <p>Volume / puff (ml) : {{ puffVolume.toFixed(2) }}</p>
 </template>
