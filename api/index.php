@@ -16,6 +16,16 @@ $input = json_decode(file_get_contents('php://input'), true);
 $action = $input['action'] ?? '';
 
 switch ($action) {
+    case 'dernier_releves':
+        $id = $input['id'] ?? 0;
+
+        $stmt = $pdo->prepare("SELECT * FROM suivi_quotidien WHERE user_id = :id ORDER BY id DESC LIMIT 1;");
+
+        $stmt->execute(['id' => $id]);
+        $releves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(["resultat" => $releves]);
+        break;
 
     case 'verifier_utilisateurs':
         $user_mail = $input['mail'] ?? 0;

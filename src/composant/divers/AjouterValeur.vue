@@ -36,7 +36,7 @@ const envoyerReleve = async () => {
 const chargerLastRel = async () => {
     const data = await requeteAPI("dernier_releves", { id: id.value });
 
-    if (data.result) {
+    if (data.resultat) {
         const historique = data.resultat as Relever[];
 
         const releve = historique[historique.length - 1];
