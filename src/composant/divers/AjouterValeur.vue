@@ -42,10 +42,11 @@ const envoyerReleve = async () => {
         });
         if (reponse.resultat) {
             alert("Information ajouté avec succes");
+            viderZoneSaisie();
         }
+    } else {
+        alert("Problème au niveau de la BD");
     }
-
-    viderZoneSaisie();
 };
 
 function viderZoneSaisie() {
