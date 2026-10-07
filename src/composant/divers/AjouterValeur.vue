@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { requeteAPI } from "../APIrequest.ts";
 import { calculerNbPuff } from "./script/calculerNbPuff.ts";
+import type { Relever } from "../graphiques/scripts/Relever.ts";
 
 const props = defineProps(["idUser"]);
 const id = ref(props.idUser);
@@ -28,19 +29,26 @@ const envoyerReleve = async () => {
     });
 
     if (reponse.resultat) {
-        console.log("Données enregistrées");
+        alert("Information ajouté avec succes");
     }
 };
 
-function display() {
-    console.log("id :", id.value);
-    console.log("relevePuff :", relevePuff.value);
-    console.log("volume_ml :", volume_ml.value);
-    console.log("tauxNico :", tauxNico.value);
-    console.log("clopesmoke :", clopesmoke.value);
-    console.log("manque :", manque.value);
-    console.log("depense :", depense.value);
-}
+const chargerLastRel = async () => {
+    const data = await requeteAPI("dernier_releves", { id: id.value });
+
+    if (data.result) {
+        const historique = data.resultat as Relever[];
+
+        const releve = historique[historique.length - 1];
+
+        relevePuff.value = releve?.releve_puff_brut ?? 0;
+        volume_ml.value = releve?.volume_ml ?? 0;
+        tauxNico.value = releve?.taux_nicotine ?? 0;
+        clopesmoke.value = releve?.cigarettes_fumees ?? 0;
+        manque.value = releve?.niveau_manque ?? 0;
+        depense.value = releve?.depenses_euros ?? 0;
+    }
+};
 </script>
 
 <template>
@@ -87,9 +95,10 @@ function display() {
             </select>
         </div>
     </div>
-    <button @click="display">display</button>
-
-    <button @click="envoyerReleve">ajouter</button>
+    <div class="btnAjtContainder">
+        <button @click="envoyerReleve">Ajouter</button>
+        <button @click="chargerLastRel">Modifier dernier relevé</button>
+    </div>
 </template>
 
 <style scoped>
@@ -110,5 +119,9 @@ function display() {
     width: 100%;
     box-sizing: border-box;
     padding: 8px;
+}
+.btnAjtContainder {
+    display: flex;
+    justify-content: flex-end;
 }
 </style>

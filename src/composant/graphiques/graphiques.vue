@@ -22,7 +22,7 @@ const dataClope = ref<number[]>([]);
 const dataNico = ref<number[]>([]);
 const dataManque = ref<number[]>([]);
 
-const chargerHistorique = async () => {
+const chargerHistoriques = async () => {
     const data = await requeteAPI("historique_releves", { id: id.value });
 
     if (data.resultat) {
@@ -38,7 +38,7 @@ const chargerHistorique = async () => {
 };
 
 onMounted(() => {
-    chargerHistorique();
+    chargerHistoriques();
 });
 </script>
 
