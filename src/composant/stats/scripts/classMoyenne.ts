@@ -35,6 +35,6 @@ export class moyenne {
         return this.totalPuff / this.dureeTotal;
     }
     get puffVolume(): number {
-        return this.totalVolume / this.totalPuff;
+        return (this.totalVolume / this.totalPuff) * 1000;
     }
 }

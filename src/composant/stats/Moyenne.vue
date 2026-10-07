@@ -54,5 +54,5 @@ function assignerValeur() {
 <template>
     <p>Argent / jours : {{ argentTemps }}</p>
     <p>Puff / jours : {{ puffTemps }}</p>
-    <p>Volume / puff (ml) : {{ puffVolume }}</p>
+    <p>Volume / puff (µl) : {{ puffVolume }}</p>
 </template>
