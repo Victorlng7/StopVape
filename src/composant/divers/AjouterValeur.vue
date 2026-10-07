@@ -17,9 +17,9 @@ const depense = ref(0);
 const idSuivi = ref(0);
 
 const envoyerReleve = async () => {
-    const puffsCalcules = await calculerNbPuff(relevePuff.value, id.value);
-
     if (idSuivi.value === 0) {
+        const puffsCalcules = await calculerNbPuff(relevePuff.value, id.value);
+
         const reponse = await requeteAPI("ajouter_releve", {
             id: id.value,
             puffBrute: relevePuff.value,
@@ -34,18 +34,29 @@ const envoyerReleve = async () => {
             alert("Information ajouté avec succes");
         }
     } else {
-        const reponse = await requeteAPI("modifier_releve", {
+        const reponse1 = await requeteAPI("supprimer_releve", {
             id: idSuivi.value,
-            puffBrute: relevePuff.value,
-            relevePuff: puffsCalcules,
-            volume_ml: volume_ml.value,
-            tauxNico: tauxNico.value,
-            clopesmoke: clopesmoke.value,
-            manque: manque.value,
-            depense: depense.value,
         });
-        if (reponse.resultat) {
-            alert("Information modifié avec succes");
+
+        if (reponse1.resultat) {
+            const puffsCalcules = await calculerNbPuff(
+                relevePuff.value,
+                id.value,
+            );
+
+            const reponse2 = await requeteAPI("modifier_releve", {
+                id: idSuivi.value,
+                puffBrute: relevePuff.value,
+                relevePuff: puffsCalcules,
+                volume_ml: volume_ml.value,
+                tauxNico: tauxNico.value,
+                clopesmoke: clopesmoke.value,
+                manque: manque.value,
+                depense: depense.value,
+            });
+            if (reponse2.resultat) {
+                alert("Information modifié avec succes");
+            }
         }
 
         idSuivi.value = 0;
