@@ -44,8 +44,8 @@ const envoyerReleve = async () => {
                 id.value,
             );
 
-            const reponse2 = await requeteAPI("modifier_releve", {
-                id: idSuivi.value,
+            const reponse2 = await requeteAPI("ajouter_releve", {
+                id: id.value,
                 puffBrute: relevePuff.value,
                 relevePuff: puffsCalcules,
                 volume_ml: volume_ml.value,
