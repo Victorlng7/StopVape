@@ -3,74 +3,63 @@
 import { ref } from "vue";
 
 //Import Type/Classes
-import { switchArome, switchNico } from "./script/scriptGout.ts";
+import {
+    calculerProportionArome,
+    calculerVolumeBooster,
+} from "./script/scriptGout.ts";
 
-//Input gout
-const quantiteGout = ref(50);
-const optionGout = [50, 100, 200, 500];
+const volumesDisponiblesMl = [50, 100, 200, 500];
+const volumeFinalMl = ref(50);
 
-const doseNico = ref(0);
-const optionNico = [0, 1.5, 3, 6, 12];
+const tauxNicotineDisponiblesMgMl = [0, 1.5, 3, 6, 12];
+const tauxNicotineSouhaiteMgMl = ref(0);
 
-const doseArome = ref("Balancé");
-const optionArome = ["Très leger", "Leger", "Balancé", "Sucré", "Intense"];
+const profilsArome = [
+    "Très leger",
+    "Leger",
+    "Balancé",
+    "Sucré",
+    "Intense",
+] as const;
+type ProfilArome = (typeof profilsArome)[number];
+const profilArome = ref<ProfilArome>("Balancé");
+const niveauParProfil: Record<ProfilArome, number> = {
+    "Très leger": 1,
+    Leger: 2,
+    Balancé: 3,
+    Sucré: 4,
+    Intense: 5,
+};
 
-const intensiteGout = ref(5);
-const optionIntensiteGout = [5, 10, 15];
-//Affichage
+const intensitesArome = [5, 10, 15];
+const intensiteArome = ref(5);
 
-const qte = ref(0);
-const nico = ref(0);
-const doseGout = ref(3);
+const volumeBoosterMl = ref(0);
+const volumeAromeMl = ref(0);
+const volumeBaseMl = ref(0);
 
-function calculerGout(
-    vol: number,
-    nicotarget: number,
-    concentrationGout: number,
-    intensite: number,
-) {
-    console.log(vol, nicotarget, concentrationGout);
-
-    nico.value = switchNico(vol, nicotarget);
-    intensiteGout.value = switchArome(concentrationGout, intensite) * vol;
-    qte.value = vol - (intensiteGout.value - nico.value);
-}
-
-function CreeGout() {
-    const vol = quantiteGout.value;
-    const nicotarget = doseNico.value;
-    const intensite = intensiteGout.value;
-    let concentrationGout = 3;
-
-    switch (doseArome.value) {
-        case "Très leger":
-            concentrationGout = 1;
-            break;
-        case "Leger":
-            concentrationGout = 2;
-            break;
-        case "Balancé":
-            concentrationGout = 3;
-            break;
-        case "Sucré":
-            concentrationGout = 4;
-            break;
-        case "Intense":
-            concentrationGout = 5;
-            break;
-    }
-
-    calculerGout(vol, nicotarget, concentrationGout, intensite);
+function calculerRecette() {
+    volumeBoosterMl.value = calculerVolumeBooster(
+        volumeFinalMl.value,
+        tauxNicotineSouhaiteMgMl.value,
+    );
+    volumeAromeMl.value =
+        calculerProportionArome(
+            niveauParProfil[profilArome.value],
+            intensiteArome.value,
+        ) * volumeFinalMl.value;
+    volumeBaseMl.value =
+        volumeFinalMl.value - volumeBoosterMl.value - volumeAromeMl.value;
 }
 </script>
 
 <template>
     <div class="container">
         <div class="classInput" id="qte">
-            <span>Quel quantité voulez vous ?</span>
-            <select v-model="quantiteGout">
+            <span>Quel volume final voulez-vous (ml) ?</span>
+            <select v-model="volumeFinalMl">
                 <option
-                    v-for="option in optionGout"
+                    v-for="option in volumesDisponiblesMl"
                     :key="option"
                     :value="option"
                 >
@@ -79,10 +68,10 @@ function CreeGout() {
             </select>
         </div>
         <div class="classInput" id="nico">
-            <span>Quel dose de nicotine (mg/ml)</span>
-            <select v-model="doseNico">
+            <span>Quel taux de nicotine voulez-vous (mg/ml) ?</span>
+            <select v-model="tauxNicotineSouhaiteMgMl">
                 <option
-                    v-for="option in optionNico"
+                    v-for="option in tauxNicotineDisponiblesMgMl"
                     :key="option"
                     :value="option"
                 >
@@ -91,10 +80,10 @@ function CreeGout() {
             </select>
         </div>
         <div class="classInput" id="darome">
-            <span>Intensité du gout</span>
-            <select v-model="doseArome">
+            <span>Profil d'arôme</span>
+            <select v-model="profilArome">
                 <option
-                    v-for="option in optionArome"
+                    v-for="option in profilsArome"
                     :key="option"
                     :value="option"
                 >
@@ -104,10 +93,10 @@ function CreeGout() {
         </div>
 
         <div class="classInput" id="iarome">
-            <span>Intensité du gout</span>
-            <select v-model="intensiteGout">
+            <span>Intensité de l'arôme</span>
+            <select v-model="intensiteArome">
                 <option
-                    v-for="option in optionIntensiteGout"
+                    v-for="option in intensitesArome"
                     :key="option"
                     :value="option"
                 >
@@ -118,10 +107,12 @@ function CreeGout() {
 
         <div class="classInput" id="validation">
             <span>Vous avez fini ?</span>
-            <button @click="CreeGout">Preparer votre E-liquide</button>
+            <button @click="calculerRecette">Préparer votre e-liquide</button>
         </div>
         <div class="classInput" id="result">
-            <p>{{ qte }} {{ doseNico }} {{ intensiteGout }} </p>
+            <p>Base : {{ volumeBaseMl.toFixed(2) }} ml</p>
+            <p>Booster : {{ volumeBoosterMl.toFixed(2) }} ml</p>
+            <p>Arôme : {{ volumeAromeMl.toFixed(2) }} ml</p>
         </div>
     </div>
 </template>

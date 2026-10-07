@@ -1,33 +1,41 @@
-export function switchArome(v: number, intensite: number): number {
-    switch (v) {
+export function calculerProportionArome(
+    niveauArome: number,
+    intensiteArome: number,
+): number {
+    switch (niveauArome) {
         case 1:
-            return switchIntensite(0.01, intensite);
+            return appliquerIntensiteArome(0.01, intensiteArome);
         case 2:
-            return switchArome(0.0225, intensite);
+            return appliquerIntensiteArome(0.0225, intensiteArome);
         case 3:
-            return switchArome(0.035, intensite);
+            return appliquerIntensiteArome(0.035, intensiteArome);
         case 4:
-            return switchArome(0.04, intensite);
+            return appliquerIntensiteArome(0.04, intensiteArome);
         case 5:
-            return switchArome(0.0475, intensite);
+            return appliquerIntensiteArome(0.0475, intensiteArome);
         default:
-            throw new Error("V se trouve entre 1 et 5 pas plus ni moins");
+            throw new Error(
+                "Le niveau d'arôme doit être compris entre 1 et 5.",
+            );
     }
 }
 
-function switchIntensite(v: number, intensite: number): number {
-    switch (intensite) {
+function appliquerIntensiteArome(proportion: number, intensiteArome: number): number {
+    switch (intensiteArome) {
         case 5:
-            return v * 6;
+            return proportion * 6;
         case 10:
-            return v * 3;
+            return proportion * 3;
         case 15:
-            return v * 2;
+            return proportion * 2;
         default:
-            throw new Error("l'intensité voulu est indisponiblew");
+            throw new Error("Cette intensité d'arôme n'est pas disponible.");
     }
 }
 
-export function switchNico(volume: number, cible: number): number {
-    return (volume * cible) / 20;
+export function calculerVolumeBooster(
+    volumeFinalMl: number,
+    tauxNicotineMgMl: number,
+): number {
+    return (volumeFinalMl * tauxNicotineMgMl) / 20;
 }
