@@ -1,19 +1,24 @@
 .mainConnection {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, minmax(190px, auto));
-    gap: 16px;
-    align-items: stretch;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
 }
 
-.graphiqueComp {
-    grid-column: 3;
-    grid-row: 1 / span 2;
+.recipeComp {
+    grid-row: span 2 / span 2;
 }
 
 .statsComp {
-    grid-column: 1 / span 2;
-    grid-row: 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.graphiqueComp {
+    grid-row: span 3 / span 3;
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 @media (max-width: 920px) {
