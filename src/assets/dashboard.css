@@ -35,6 +35,12 @@
     pointer-events: none;
 }
 
+.flex {
+    display: flex;
+    flex: auto;
+    justify-content: space-between;
+}
+
 .dashboard-eyebrow {
     margin: 0 0 6px;
     color: var(--color-primary-300);

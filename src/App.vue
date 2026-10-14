@@ -21,7 +21,6 @@ const affichage = ref([true, false, false]);
 
 //Fonction changer l'id user
 function changerId(id: number) {
-    console.log("Changement d'id au niveau de app : ", id);
     iduser.value = id;
 }
 </script>
