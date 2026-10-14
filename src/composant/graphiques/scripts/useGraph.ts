@@ -10,9 +10,19 @@ export const dataNico = ref<number[]>([]);
 export const dataManque = ref<number[]>([]); // Ajouté ici
 export const dataArgent = ref<number[]>([]);
 
+export function viderDonneeGraph() {
+    labelsDates.value = [];
+    dataPuffs.value = [];
+    dataVolume.value = [];
+    dataClope.value = [];
+    dataNico.value = [];
+    dataManque.value = [];
+    dataArgent.value = [];
+}
+
 // On exporte la fonction de chargement
-export async function chargerDonneeGraph(idUser: number) {
-    const historique = await chargerHistorique(idUser);
+export async function chargerDonneeGraph() {
+    const historique = await chargerHistorique();
 
     if (historique) {
         labelsDates.value = historique.map((r: any) => r.date_releve);

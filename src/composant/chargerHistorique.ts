@@ -1,10 +1,10 @@
 import { requeteAPI } from "./APIrequest.ts";
 import type { Relever } from "./Relever.ts";
 
-export async function chargerHistorique(id: number): Promise<Relever[] | void> {
-    const data = await requeteAPI("historique_releves", { id: id });
+export async function chargerHistorique(): Promise<Relever[] | void> {
+    const data = await requeteAPI("historique_releves");
 
-    if (data.resultat) {
+    if (Array.isArray(data.resultat)) {
         return data.resultat as Relever[];
     }
 }

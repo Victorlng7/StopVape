@@ -1,6 +1,8 @@
 <script setup lang="ts">
-//Improt vue
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { requeteAPI, type AuthenticatedUser } from "./composant/APIrequest";
+import { viderDonneeGraph } from "./composant/graphiques/scripts/useGraph";
+import { viderDonneeStats } from "./composant/stats/scripts/useStats";
 
 //Import Style
 import "./assets/root.css";
@@ -13,22 +15,63 @@ import utilisateur from "./composant/login/utilisateur.vue";
 import affichageCo from "./composant/affichage/affichageCo.vue";
 import AffichageDeco from "./composant/affichage/affichageDeco.vue";
 
-// Variable hardcodé iduser
-const iduser = ref();
+const utilisateurConnecte = ref<AuthenticatedUser | null>(null);
+const page = ref<"accueil" | "auth">("accueil");
+const chargementSession = ref(true);
+const erreurSession = ref("");
+const erreurDeconnexion = ref("");
 
-//Variable de quoi afficher
-const affichage = ref([true, false, false]);
+onMounted(async () => {
+    try {
+        const reponse = await requeteAPI("session");
+        utilisateurConnecte.value = reponse.utilisateur ?? null;
+    } catch {
+        erreurSession.value = "Impossible de vérifier votre session.";
+    } finally {
+        chargementSession.value = false;
+    }
+});
 
-//Fonction changer l'id user
-function changerId(id: number) {
-    iduser.value = id;
+function ouvrirAuthentification() {
+    page.value = "auth";
+}
+
+function connecter(utilisateur: AuthenticatedUser) {
+    utilisateurConnecte.value = utilisateur;
+}
+
+async function deconnecter() {
+    erreurDeconnexion.value = "";
+    try {
+        const reponse = await requeteAPI("deconnection_utilisateur");
+        if (reponse.success) {
+            viderDonneeGraph();
+            viderDonneeStats();
+            utilisateurConnecte.value = null;
+            page.value = "accueil";
+        } else {
+            erreurDeconnexion.value = reponse.erreur ?? "Déconnexion impossible.";
+        }
+    } catch {
+        erreurDeconnexion.value = "Impossible de contacter le serveur.";
+    }
 }
 </script>
 
 <template>
-    <affichageDeco :affichage="affichage" v-if="affichage[0]" />
-    <utilisateur :affichage="affichage" @id="changerId" v-if="affichage[1]" />
-    <affichageCo :affichage="affichage" :id="iduser" v-if="affichage[2]" />
+    <p v-if="chargementSession">Chargement de votre session…</p>
+    <p v-else-if="erreurSession">{{ erreurSession }}</p>
+    <affichageCo
+        v-else-if="utilisateurConnecte"
+        :user="utilisateurConnecte"
+        :logout-error="erreurDeconnexion"
+        @logout="deconnecter"
+    />
+    <utilisateur
+        v-else-if="page === 'auth'"
+        @login="connecter"
+    />
+    <AffichageDeco v-else @open-auth="ouvrirAuthentification" />
 </template>
 
 <style scoped></style>

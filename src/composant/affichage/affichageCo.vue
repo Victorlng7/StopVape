@@ -1,6 +1,6 @@
 <script setup lang="ts">
-//Import vue
-import { ref, watch } from "vue";
+import { ref } from "vue";
+import type { AuthenticatedUser } from "../APIrequest";
 
 //Import composants
 import AjouterValeur from "../divers/AjouterValeur.vue";
@@ -8,35 +8,20 @@ import creeGout from "../divers/creeGout.vue";
 import graphiques from "../graphiques/graphiques.vue";
 import Stats from "../stats/Stats.vue";
 
-//Creation IdUser
-const iduser = ref();
-
-//Import
-const props = defineProps(["affichage", "id"]);
-
-//Assignation quand le props arrive
-watch(
-    () => props.id,
-    (newId) => {
-        console.log("nouvelle valeur id affichage : ", newId);
-        iduser.value = newId;
-    },
-    { deep: true, immediate: true },
-);
+const props = defineProps<{
+    user: AuthenticatedUser;
+    logoutError?: string;
+}>();
+const emit = defineEmits<{ logout: [] }>();
 
 const parametre = ref(false);
 
 function parametretrue() {
-    if (parametre.value) {
-        parametre.value = false;
-    } else parametre.value = true;
+    parametre.value = !parametre.value;
 }
 
 function deco() {
-    console.log("Deconnection");
-
-    props.affichage[2] = false;
-    props.affichage[0] = true;
+    emit("logout");
 }
 </script>
 
@@ -46,7 +31,7 @@ function deco() {
             <div class="flex">
                 <div>
                     <p class="dashboard-eyebrow">ESPACE PERSONNEL</p>
-                    <h1>Votre suivi</h1>
+                    <h1>Bonjour {{ props.user.prenom }}</h1>
                     <p
                         >Vos habitudes, vos données et vos progrès au même
                         endroit.</p
@@ -61,6 +46,9 @@ function deco() {
                 </div>
             </div>
         </header>
+        <p v-if="props.logoutError" role="alert">
+            {{ props.logoutError }}
+        </p>
 
         <div class="mainConnection">
             <section class="dashboard-panel recipeComp">
@@ -68,17 +56,17 @@ function deco() {
             </section>
 
             <section class="dashboard-panel entryComp">
-                <AjouterValeur :idUser="iduser" />
+                <AjouterValeur />
             </section>
 
             <section class="dashboard-panel graphiqueComp">
                 <h2>Évolution</h2>
-                <graphiques :idUser="iduser" />
+                <graphiques />
             </section>
 
             <section class="dashboard-panel statsComp">
                 <h2>Vos statistiques</h2>
-                <Stats :id-user="iduser" />
+                <Stats />
             </section>
         </div>
     </main>

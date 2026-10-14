@@ -6,7 +6,6 @@ import { ref } from "vue";
 import { requeteAPI } from "../APIrequest";
 import { isMdp } from "./scripts/isMdp";
 import { IsMail } from "./scripts/verifMail";
-import type { Utilisateur } from "./scripts/interfaceUser";
 
 const nom = ref("");
 const prenom = ref("");
@@ -14,61 +13,43 @@ const mail = ref("");
 const mdp = ref("");
 
 const inscrit = ref(false);
-const idUser = ref();
+const erreur = ref("");
+const chargement = ref(false);
 
 async function VerifierInfo() {
+    erreur.value = "";
     if (IsMail(mail.value) && isMdp(mdp.value) && nom.value && prenom.value) {
-        console.log("Info OK");
-
-        const mailValide = await requeteAPI("verifier_utilisateurs", {
-            mail: mail.value.toLowerCase(),
-        });
-        console.log(mailValide.resultat);
-
-        if (mailValide.resultat[0]) {
-            console.error("Email déjà utilisé");
-            console.log(mailValide.reponse);
-        } else {
-            console.log(mailValide.reponse);
-            ajouterMembre();
-        }
+        await ajouterMembre();
     } else {
-        console.error("Une des info saisie est pas ok !");
-        console.log(mail.value, mdp.value, nom.value, prenom.value);
+        erreur.value = "Vérifiez les informations saisies.";
     }
 }
 
 const ajouterMembre = async () => {
-    //Creation de l'utilisateur même si l'email n'est pas vérifier
-    const reponse = await requeteAPI("creer_utilisateur", {
-        nom: nom.value,
-        prenom: prenom.value,
-        email: mail.value.toLowerCase(),
-        mot_de_passe: mdp.value,
-    });
-
-    //Si l'utilisateur est créer
-    if (reponse.resultat) {
-        //On récupère son ID pour le code de vérification
-        const id = await requeteAPI("recuperer_id", {
-            email: mail.value.toLowerCase(),
+    chargement.value = true;
+    try {
+        const reponse = await requeteAPI("creer_utilisateur", {
+            nom: nom.value.trim(),
+            prenom: prenom.value.trim(),
+            email: mail.value.trim().toLowerCase(),
+            mot_de_passe: mdp.value,
         });
 
-        //Si on a son ID
-        if (id.resultat) {
-            idUser.value = id.resultat[0].id;
-
-            //Creation du code de vérification
-            const verif = await requeteAPI("verif_mail", {
-                id: idUser.value,
-            });
-
-            //Si tout est bon on met inscrit a true
-            //(pour afficher la partie pour vérifier le code)
-            if (verif.resultat) {
-                inscrit.value = true;
-            }
+        if (reponse.erreur) {
+            erreur.value = reponse.erreur;
+            return;
         }
+
+        const verification = await requeteAPI("verif_mail");
+        if (verification.erreur) {
+            erreur.value = verification.erreur;
+            return;
+        }
+        inscrit.value = true;
+    } catch {
+        erreur.value = "Le serveur est indisponible. Réessayez plus tard.";
+    } finally {
+        chargement.value = false;
     }
 };
 
@@ -77,14 +58,21 @@ const verifier = ref(false);
 
 //Quand on valide le code de vérification
 const verifCode = async () => {
-    const reponse = await requeteAPI("verif_code", {
-        id: idUser.value,
-        code: CodeVerif.value,
-    });
-
-    //Si success
-    if (reponse.success) {
-        verifier.value = true;
+    erreur.value = "";
+    chargement.value = true;
+    try {
+        const reponse = await requeteAPI("verif_code", {
+            code: CodeVerif.value,
+        });
+        if (reponse.success) {
+            verifier.value = true;
+        } else {
+            erreur.value = reponse.erreur ?? "Code de vérification invalide.";
+        }
+    } catch {
+        erreur.value = "Le serveur est indisponible. Réessayez plus tard.";
+    } finally {
+        chargement.value = false;
     }
 };
 </script>
@@ -125,21 +113,27 @@ const verifCode = async () => {
         </div>
 
         <div class="auth-submit">
-            <button class="Sign" @click="VerifierInfo">S'inscrire</button>
+            <p v-if="erreur" role="alert">{{ erreur }}</p>
+            <button class="Sign" :disabled="chargement" @click="VerifierInfo">
+                {{ chargement ? "Inscription..." : "S'inscrire" }}
+            </button>
         </div>
     </div>
     <div v-if="inscrit">
-        <p>Un code de vérification à été envoyé à l'adresse {{ mail }}</p>
+        <p>Un code de vérification a été demandé pour {{ mail }}</p>
 
         <input
             class="inputSign"
             type="text"
             v-model="CodeVerif"
-            placeholder="Nom"
-            autocomplete="family-name"
+            placeholder="Code de vérification"
+            autocomplete="one-time-code"
         />
 
-        <button class="Sign" @click="verifCode">Vérifier votre compte</button>
+        <p v-if="erreur" role="alert">{{ erreur }}</p>
+        <button class="Sign" :disabled="chargement" @click="verifCode">
+            Vérifier votre compte
+        </button>
 
         <p v-if="verifier"
             >Vous êtes désormai inscrit ! Vous pouvez vous connecter</p

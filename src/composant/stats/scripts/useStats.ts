@@ -9,9 +9,18 @@ export const dataClope = ref<number[]>([]);
 export const dataNico = ref<number[]>([]);
 export const dataArgent = ref<number[]>([]);
 
+export function viderDonneeStats() {
+    labelsDates.value = [];
+    dataPuffs.value = [];
+    dataVolume.value = [];
+    dataClope.value = [];
+    dataNico.value = [];
+    dataArgent.value = [];
+}
+
 // 2. On exporte la fonction de rechargement
-export async function chargerDonneeStats(idUser: number) {
-    const historique = await chargerHistorique(idUser);
+export async function chargerDonneeStats() {
+    const historique = await chargerHistorique();
 
     if (historique) {
         labelsDates.value = historique.map((r: any) => r.date_releve);

@@ -11,9 +11,6 @@ import type { Relever } from "../Relever.ts";
 import { chargerDonneeGraph } from "../graphiques/scripts/useGraph.ts";
 import { chargerDonneeStats } from "../stats/scripts/useStats.ts";
 
-const props = defineProps(["idUser"]);
-const id = ref(props.idUser);
-
 const relevePuff = ref(0);
 const volume_ml = ref(0);
 const tauxNico = ref(0);
@@ -29,16 +26,15 @@ const envoyerReleve = async () => {
             id: idSuivi.value,
         });
 
-        if (reponse.resultat) {
+        if (reponse.success) {
             idSuivi.value = 0;
         }
     }
 
     if (idSuivi.value === 0) {
-        const puffsCalcules = await calculerNbPuff(relevePuff.value, id.value);
+        const puffsCalcules = await calculerNbPuff(relevePuff.value);
 
         const reponse = await requeteAPI("ajouter_releve", {
-            id: id.value,
             puffBrute: relevePuff.value,
             relevePuff: puffsCalcules,
             volume_ml: volume_ml.value,
@@ -47,7 +43,7 @@ const envoyerReleve = async () => {
             manque: manque.value,
             depense: depense.value,
         });
-        if (reponse.resultat) {
+        if (reponse.success) {
             alert("Information ajouté avec succes");
             viderZoneSaisie();
             actualiserData();
@@ -58,8 +54,8 @@ const envoyerReleve = async () => {
 };
 
 function actualiserData() {
-    chargerDonneeGraph(id.value);
-    chargerDonneeStats(id.value);
+    chargerDonneeGraph();
+    chargerDonneeStats();
 }
 
 function viderZoneSaisie() {
@@ -78,7 +74,7 @@ function viderZoneSaisie() {
 }
 
 const chargerLastRel = async () => {
-    const data = await requeteAPI("dernier_releves", { id: id.value });
+    const data = await requeteAPI("dernier_releves");
 
     if (data.resultat) {
         const historique = data.resultat as Relever[];

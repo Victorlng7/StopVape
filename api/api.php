@@ -7,6 +7,7 @@ function chargerEnv($chemin)
     foreach ($lignes as $ligne) {
         if (strpos(trim($ligne), '#') === 0) continue;
 
+        if (!str_contains($ligne, '=')) continue;
         list($nom, $valeur) = explode('=', $ligne, 2);
         $_ENV[trim($nom)] = trim($valeur);
     }
@@ -23,6 +24,10 @@ try {
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 } catch (PDOException $e) {
-    die(json_encode(["erreur" => "Erreur de connexion a la base de données : ", $e]));
+    error_log("Connexion base de données impossible : " . $e->getMessage());
+    http_response_code(500);
+    header("Content-Type: application/json; charset=UTF-8");
+    die(json_encode(["erreur" => "Service temporairement indisponible"]));
 }

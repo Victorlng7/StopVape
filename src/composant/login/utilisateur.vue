@@ -1,17 +1,16 @@
 <script setup lang="ts">
-//Import vue
 import { ref } from "vue";
+import type { AuthenticatedUser } from "../APIrequest";
 
-//import style
-import App from "@/App.vue";
 import "./assets/styleUser.css";
 
 //Import composants
 import pageSingUp from "./pageSingUp.vue";
 import pageSignIn from "./pageSignIn.vue";
 
-const props = defineProps(["affichage"]);
-const emit = defineEmits(["id"]);
+const emit = defineEmits<{
+    login: [user: AuthenticatedUser];
+}>();
 
 const vSi = ref(true);
 const vSu = ref(false);
@@ -28,12 +27,8 @@ function changerV() {
     }
 }
 
-function changerId(id: number) {
-    console.log("Id récupérer ", id);
-    emit("id", id);
-    console.log("changerconnection");
-    props.affichage[1] = false;
-    props.affichage[2] = true;
+function connecter(user: AuthenticatedUser) {
+    emit("login", user);
 }
 </script>
 
@@ -51,7 +46,7 @@ function changerId(id: number) {
             >
             <article class="auth-form">
                 <div v-if="vSi">
-                    <pageSignIn @id="changerId" />
+                    <pageSignIn @login="connecter" />
                 </div>
                 <div v-if="vSu">
                     <pageSingUp />

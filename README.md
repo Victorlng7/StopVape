@@ -40,3 +40,16 @@ bun dev
 ```sh
 bun run build
 ```
+
+## Configuration de l'API et des sessions
+
+L'API utilise une session PHP (cookie `HttpOnly` et `SameSite=Strict`) pour
+identifier l'utilisateur. Les actions de lecture et d'écriture prennent
+l'utilisateur de cette session : ne pas envoyer d'identifiant utilisateur
+depuis le navigateur pour autoriser l'accès aux données.
+
+En développement, l'origine `http://localhost:5173` est autorisée par défaut.
+Pour une autre origine ou un déploiement, configurer `APP_ORIGINS` dans
+`api/.env` avec une liste séparée par des virgules, puis configurer
+`VITE_API_URL` dans l'environnement de build Vite. En production, servir
+l'application et l'API en HTTPS et n'autoriser que les origines de confiance.

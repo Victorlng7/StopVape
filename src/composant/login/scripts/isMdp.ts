@@ -1,7 +1,7 @@
 import { specChar, numChar } from "./char.ts";
 
 export function isMdp(mdp: string): boolean {
-    if (mdp.length > 7) {
+    if (mdp.length >= 10) {
         let bonSpec = false;
         let bonNum = false;
 
@@ -12,10 +12,7 @@ export function isMdp(mdp: string): boolean {
             if (mdp.includes(element.toString())) bonNum = true;
         });
 
-        if (bonNum && bonSpec) {
-            console.log("MDP good");
-            return true;
-        }
+        if (bonNum && bonSpec) return true;
     }
     return false;
 }

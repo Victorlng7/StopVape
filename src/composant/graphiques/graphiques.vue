@@ -18,11 +18,8 @@ import {
     chargerDonneeGraph,
 } from "./scripts/useGraph.ts";
 
-const props = defineProps(["idUser"]);
-
 onMounted(() => {
-    // On passe directement l'ID de la prop
-    chargerDonneeGraph(props.idUser);
+    chargerDonneeGraph();
 });
 </script>
 

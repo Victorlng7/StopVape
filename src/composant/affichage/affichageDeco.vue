@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const props = defineProps(["affichage"]);
+const emit = defineEmits<{
+    openAuth: [];
+}>();
 
 function changeAffichage() {
-    props.affichage[0] = false;
-    props.affichage[1] = true;
+    emit("openAuth");
 }
 </script>
 

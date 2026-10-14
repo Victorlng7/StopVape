@@ -14,10 +14,8 @@ import {
     chargerDonneeStats,
 } from "./scripts/useStats.ts";
 
-const props = defineProps(["idUser"]);
-
 onMounted(() => {
-    chargerDonneeStats(props.idUser);
+    chargerDonneeStats();
 });
 </script>
 
