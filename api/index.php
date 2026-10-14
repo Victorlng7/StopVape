@@ -94,8 +94,8 @@ switch ($action) {
         break;
 
     case 'connection_utilisateur':
-        $user_mail = $input['mail'] ?? 0;
-        $user_password = $input['password'] ?? 0;
+        $user_mail = $input['mail'] ?? "";
+        $user_password = $input['password'] ?? "";
 
         $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
 
@@ -106,9 +106,10 @@ switch ($action) {
             $user_password,
             $user['mot_de_passe']
         )) {
+            unset($user['mot_de_passe']);
             echo json_encode(["resultat" => $user]);
         } else {
-            echo json_encode(["error" => error_reporting()]);
+            echo json_encode(["error" => "utilisateur incorect"()]);
         }
 
         break;
