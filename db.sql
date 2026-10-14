@@ -22,3 +22,13 @@ CREATE TABLE suivi_quotidien (
   
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
+
+CREATE TABLE login_verification (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    code VARCHAR(6) NOT NULL,
+    sent_at DATETIME NOT NULL,
+    expires_at DATETIME NOT NULL,
+    is_used TINYINT(1) DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);

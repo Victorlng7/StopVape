@@ -130,7 +130,70 @@ switch ($action) {
             'mdp' => $mdpHache
         ]);
 
+
+
         echo json_encode(["resultat" => "Utilisateur ajouté avec succès"]);
+        break;
+
+    case 'recuperer_id':
+        $mail = $input['email'] ?? '';
+
+        $stmt = $pdo->prepare("SELECT id FROM user WHERE email = :email");
+        $stmt->execute([
+            ':email' => $mail
+        ]);
+
+        $idUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode(["resultat" => $idUser]);
+        break;
+
+    case 'verif_mail':
+        $id = $input("id") ?? 0;
+
+        $code = random_int(100000, 999999);
+        $sent_at = date('Y-m-d H:i:s');
+        $expires_at = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+
+        $stmt = $pdo->prepare("
+            INSERT INTO login_verification (user_id, code, sent_at, expires_at) 
+            VALUES (:user_id, :code, :sent_at, :expires_at)
+        ");
+
+        $stmt->execute([
+            'user_id' => $id,
+            'code' => $code,
+            'sent_at' => $sent_at,
+            'expires_at' => $expires_at
+        ]);
+
+        echo json_encode(["resultat" => "Code créer avec succes"]);
+        break;
+
+    case 'verif_code':
+        $id = $input["id"] ?? 0;
+        $codeIn = $input["code"] ?? 0;
+
+        $stmt = $pdo->prepare("SELECT id, code, expires_at FROM login_verification WHERE user_id = :id AND is_used = 0 ORDER BY id DESC LIMIT 1");
+        $stmt->execute(['id' => $id]);
+        $verification = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($verification) {
+            $current_time = date('Y-m-d H:i:s');
+
+            if ((string)$verification['code'] === (string)$codeIn) {
+
+                if ($current_time <= $verification['expires_at']) {
+                    echo json_encode(["success" => "Code valide !"]);
+                } else {
+                    echo json_encode(["error" => "Le code a expiré."]);
+                }
+            } else {
+                echo json_encode(["error" => "Code incorrect."]);
+            }
+        } else {
+            echo json_encode(["error" => "Aucune demande de code trouvée."]);
+        }
+
         break;
 
     case 'supprimer_utilisateur':
