@@ -34,6 +34,7 @@ async function VerifierInfo() {
         }
     } else {
         console.error("Une des info saisie est pas ok !");
+        console.log(mail.value, mdp.value, nom.value, prenom.value);
     }
 }
 
@@ -55,9 +56,7 @@ const ajouterMembre = async () => {
 
         //Si on a son ID
         if (id.resultat) {
-            //Petite verif a faire pour avoir la bonne valeur dans idUser
-            console.log(id.resultat);
-            idUser.value = id.resultat;
+            idUser.value = id.resultat[0].id;
 
             //Creation du code de vérification
             const verif = await requeteAPI("verif_mail", {

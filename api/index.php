@@ -107,7 +107,7 @@ switch ($action) {
                 unset($user['mot_de_passe']);
                 echo json_encode(["resultat" => $user]);
             } else {
-                echo json_encode(["error" => "Veuillez vérifier votre adresse e-mail avant de vous connecter."]);
+                echo json_encode(["errorVerif" => "Veuillez vérifier votre adresse e-mail avant de vous connecter."]);
             }
         } else {
             echo json_encode(["error" => "Utilisateur ou mot de passe incorrect."]);

@@ -5,7 +5,6 @@ import { ref } from "vue";
 //import Fonction/interface
 import { requeteAPI } from "../APIrequest";
 
-const id = ref();
 const mail = ref("");
 const mdp = ref("");
 
@@ -17,6 +16,9 @@ async function VerifierInfo() {
             mail: mail.value.toLowerCase(),
             password: mdp.value,
         });
+        if (connection.errorVerif) {
+            console.log("Veuillez vérifier votre compte");
+        }
         if (connection.resultat) {
             emit("id", connection.resultat.id, "connecter", true);
         }

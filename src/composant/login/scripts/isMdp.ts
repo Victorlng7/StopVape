@@ -1,7 +1,6 @@
-export function isMdp(mdp: string): boolean {
-    const specChar = ["!", ".", "?", ",", "^", "$", "~", "-", "_"];
-    const numChar = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { specChar, numChar } from "./char.ts";
 
+export function isMdp(mdp: string): boolean {
     if (mdp.length > 7) {
         let bonSpec = false;
         let bonNum = false;
@@ -14,6 +13,7 @@ export function isMdp(mdp: string): boolean {
         });
 
         if (bonNum && bonSpec) {
+            console.log("MDP good");
             return true;
         }
     }
