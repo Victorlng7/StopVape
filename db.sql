@@ -3,7 +3,8 @@ CREATE TABLE user (
   email VARCHAR(255) NOT NULL UNIQUE,
   nom VARCHAR(100) NOT NULL,
   prenom VARCHAR(100) NOT NULL,
-  mot_de_passe VARCHAR(255) NOT NULL
+  mot_de_passe VARCHAR(255) NOT NULL,
+  est_verifie TINYINT(1) DEFAULT 0
 );
 
 CREATE TABLE suivi_quotidien (

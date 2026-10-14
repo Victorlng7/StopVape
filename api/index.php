@@ -148,7 +148,7 @@ switch ($action) {
         break;
 
     case 'verif_mail':
-        $id = $input("id") ?? 0;
+        $id = $input["id"] ?? 0;
 
         $code = random_int(100000, 999999);
         $sent_at = date('Y-m-d H:i:s');
