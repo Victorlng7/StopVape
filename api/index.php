@@ -98,18 +98,19 @@ switch ($action) {
         $user_password = $input['password'] ?? "";
 
         $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
-
         $stmt->execute(['email' => $user_mail]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify(
-            $user_password,
-            $user['mot_de_passe']
-        )) {
-            unset($user['mot_de_passe']);
-            echo json_encode(["resultat" => $user]);
+        if ($user && password_verify($user_password, $user['mot_de_passe'])) {
+
+            if ($user['est_verifie'] == 1) {
+                unset($user['mot_de_passe']);
+                echo json_encode(["resultat" => $user]);
+            } else {
+                echo json_encode(["error" => "Veuillez vérifier votre adresse e-mail avant de vous connecter."]);
+            }
         } else {
-            echo json_encode(["error" => "utilisateur incorect"()]);
+            echo json_encode(["error" => "Utilisateur ou mot de passe incorrect."]);
         }
 
         break;
@@ -129,8 +130,6 @@ switch ($action) {
             'email' => $email,
             'mdp' => $mdpHache
         ]);
-
-
 
         echo json_encode(["resultat" => "Utilisateur ajouté avec succès"]);
         break;
@@ -183,6 +182,12 @@ switch ($action) {
             if ((string)$verification['code'] === (string)$codeIn) {
 
                 if ($current_time <= $verification['expires_at']) {
+                    $stmt = $pdo->prepare("UPDATE user SET est_verifie = 1 WHERE id = :id");
+                    $stmt->execute(['id' => $id]);
+
+                    $stmt2 = $pdo->prepare("UPDATE login_verification SET is_used = 1 WHERE id = :verif_id");
+                    $stmt2->execute(['verif_id' => $verification['id']]);
+
                     echo json_encode(["success" => "Code valide !"]);
                 } else {
                     echo json_encode(["error" => "Le code a expiré."]);
