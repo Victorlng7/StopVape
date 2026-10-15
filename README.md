@@ -1,4 +1,4 @@
-# Calculateur_CE
+# STOPVAPE (temp name)
 
 This template should help get you started developing with Vue 3 in Vite.
 
