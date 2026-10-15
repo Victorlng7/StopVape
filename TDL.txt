@@ -20,10 +20,11 @@ Changer le nombre de taffes possible sur la CE (nouvelle table SQL + possibilit�
 
 Script / Securitée :
 Ajouter variable d'environnement au niveau du PHP et fonction fetch (TS)
-Ajouter liste de caractère qu'on peut saisir pour un email idem pour mdp
-Vérification de l'adresse mail pour pas surcharger 
+//Ajouter liste de caractère qu'on peut saisir pour un email idem pour mdp
+//Vérification de l'adresse mail pour pas surcharger 
+    -->Manque l'envoie du mail est good
 Ajout captcha pour pas blew le serveur / Attaque ddos
-Verification de l'email avant de le send a la BD pour éviter injeciton sql
+//Verification de l'email avant de le send a la BD pour éviter injeciton sql
 
 V2 : 
 Rework (apres que le site soit release) :
